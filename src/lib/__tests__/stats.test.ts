@@ -22,12 +22,84 @@ const data: MatchupData = {
 };
 
 describe('computeOverall', () => {
-  it('counts wins, losses, total, and win rate from decided matches only', () => {
+  it('counts decided, undecided, and total matches', () => {
     const result = computeOverall(data);
-    expect(result.wins).toBe(4);
-    expect(result.losses).toBe(4);
-    expect(result.total).toBe(8);
-    expect(result.winRate).toBeCloseTo(0.5);
+    expect(result.decided).toBe(4);
+    expect(result.undecided).toBe(1);
+    expect(result.total).toBe(5);
+  });
+});
+
+describe('computeOverall edge cases', () => {
+  it('returns zeros for empty data', () => {
+    const empty: MatchupData = { exportedAt: '', brackets: [] };
+    expect(computeOverall(empty)).toEqual({ decided: 0, undecided: 0, total: 0 });
+  });
+
+  it('counts all matches as undecided when no winners', () => {
+    const allUndecided: MatchupData = {
+      exportedAt: '',
+      brackets: [
+        {
+          id: 'b1', name: 'B1', type: 'single-elimination', createdAt: '',
+          matches: [
+            { id: 'm1', round: 1, playerA: 'A', playerB: 'B', winner: null, scoreA: null, scoreB: null }
+          ]
+        }
+      ]
+    };
+    expect(computeOverall(allUndecided)).toEqual({ decided: 0, undecided: 1, total: 1 });
+  });
+});
+
+describe('computeLeaderboard edge cases', () => {
+  it('returns empty array for empty data', () => {
+    const empty: MatchupData = { exportedAt: '', brackets: [] };
+    expect(computeLeaderboard(empty)).toEqual([]);
+  });
+
+  it('shows a winless player with 0% win rate', () => {
+    const winless: MatchupData = {
+      exportedAt: '',
+      brackets: [
+        {
+          id: 'b1', name: 'B1', type: 'single-elimination', createdAt: '',
+          matches: [
+            { id: 'm1', round: 1, playerA: 'Alice', playerB: 'Bob', winner: 'Bob', scoreA: 0, scoreB: 2 }
+          ]
+        }
+      ]
+    };
+    const result = computeLeaderboard(winless);
+    const alice = result.find((e) => e.player === 'Alice');
+    expect(alice).toBeDefined();
+    expect(alice!.wins).toBe(0);
+    expect(alice!.losses).toBe(1);
+    expect(alice!.winRate).toBe(0);
+  });
+
+  it('aggregates a player across multiple brackets', () => {
+    const multi: MatchupData = {
+      exportedAt: '',
+      brackets: [
+        {
+          id: 'b1', name: 'B1', type: 'single-elimination', createdAt: '',
+          matches: [
+            { id: 'm1', round: 1, playerA: 'Alice', playerB: 'Bob', winner: 'Alice', scoreA: 2, scoreB: 0 }
+          ]
+        },
+        {
+          id: 'b2', name: 'B2', type: 'single-elimination', createdAt: '',
+          matches: [
+            { id: 'm2', round: 1, playerA: 'Alice', playerB: 'Carol', winner: 'Alice', scoreA: 2, scoreB: 1 }
+          ]
+        }
+      ]
+    };
+    const result = computeLeaderboard(multi);
+    const alice = result.find((e) => e.player === 'Alice');
+    expect(alice!.wins).toBe(2);
+    expect(alice!.total).toBe(2);
   });
 });
 

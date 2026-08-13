@@ -1,24 +1,21 @@
 import type { MatchupData } from '../types';
 
 export interface OverallStats {
-  wins: number;
-  losses: number;
+  decided: number;
+  undecided: number;
   total: number;
-  winRate: number;
 }
 
 export function computeOverall(data: MatchupData): OverallStats {
-  let wins = 0;
-  let losses = 0;
+  let decided = 0;
+  let undecided = 0;
   for (const bracket of data.brackets) {
     for (const match of bracket.matches) {
-      if (match.winner === null) continue;
-      wins += 1;
-      losses += 1;
+      if (match.winner === null) undecided += 1;
+      else decided += 1;
     }
   }
-  const total = wins + losses;
-  return { wins, losses, total, winRate: total === 0 ? 0 : wins / total };
+  return { decided, undecided, total: decided + undecided };
 }
 
 export interface HeadToHeadRecord {

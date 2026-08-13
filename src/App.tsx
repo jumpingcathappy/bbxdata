@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { MatchupData } from './types';
 import { loadData } from './lib/loadData';
+import { listenForSyncData, openSyncPopup } from './lib/sync';
 import Overview from './components/Overview';
 import HeadToHead from './components/HeadToHead';
 import Leaderboard from './components/Leaderboard';
@@ -18,10 +19,17 @@ export default function App() {
     loadData().then(setData);
   }, []);
 
+  useEffect(() => {
+    const stop = listenForSyncData((d) => {
+      setData(d);
+      setSyncing(false);
+    });
+    return stop;
+  }, []);
+
   const handleSync = () => {
     setSyncing(true);
-    // Sync flow wired in Task 13.
-    setTimeout(() => setSyncing(false), 2000);
+    openSyncPopup();
   };
 
   const tabs: { id: Tab; label: string }[] = [

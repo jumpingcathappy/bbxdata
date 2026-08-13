@@ -45,6 +45,33 @@ describe('computeHeadToHead', () => {
   });
 });
 
+describe('computeHeadToHead swapped ordering', () => {
+  it('routes wins correctly when the same pair has swapped player order', () => {
+    const swappedData: MatchupData = {
+      exportedAt: '2026-08-13T10:00:00Z',
+      brackets: [
+        {
+          id: 'b1',
+          name: 'B1',
+          type: 'single-elimination',
+          createdAt: '2026-07-01T00:00:00Z',
+          matches: [
+            { id: 'm1', round: 1, playerA: 'Bob', playerB: 'Alice', winner: 'Bob', scoreA: 2, scoreB: 1 },
+            { id: 'm2', round: 1, playerA: 'Alice', playerB: 'Bob', winner: 'Alice', scoreA: 2, scoreB: 1 }
+          ]
+        }
+      ]
+    };
+    const result = computeHeadToHead(swappedData);
+    const rec = result.find((r) => r.playerA === 'Alice' && r.playerB === 'Bob');
+    expect(rec).toBeDefined();
+    expect(rec!.playerA).toBe('Alice');
+    expect(rec!.playerB).toBe('Bob');
+    expect(rec!.aWins).toBe(1); // Alice won once
+    expect(rec!.bWins).toBe(1); // Bob won once
+  });
+});
+
 describe('computeLeaderboard', () => {
   it('ranks players by wins then win rate', () => {
     const result = computeLeaderboard(data);

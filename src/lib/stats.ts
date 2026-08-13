@@ -35,14 +35,15 @@ export function computeHeadToHead(data: MatchupData): HeadToHeadRecord[] {
   for (const bracket of data.brackets) {
     for (const match of bracket.matches) {
       if (match.winner === null) continue;
+      const [playerA, playerB] = [match.playerA, match.playerB].sort();
       const k = key(match.playerA, match.playerB);
       let rec = map.get(k);
       if (!rec) {
-        rec = { playerA: match.playerA, playerB: match.playerB, aWins: 0, bWins: 0 };
+        rec = { playerA, playerB, aWins: 0, bWins: 0 };
         map.set(k, rec);
       }
-      if (match.winner === match.playerA) rec.aWins += 1;
-      else if (match.winner === match.playerB) rec.bWins += 1;
+      if (match.winner === playerA) rec.aWins += 1;
+      else if (match.winner === playerB) rec.bWins += 1;
     }
   }
   return Array.from(map.values());

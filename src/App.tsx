@@ -1,3 +1,61 @@
+import { useEffect, useState } from 'react';
+import type { MatchupData } from './types';
+import { loadData } from './lib/loadData';
+import Overview from './components/Overview';
+import HeadToHead from './components/HeadToHead';
+import Leaderboard from './components/Leaderboard';
+import Brackets from './components/Brackets';
+import SyncButton from './components/SyncButton';
+
+type Tab = 'overview' | 'headtohead' | 'leaderboard' | 'brackets';
+
 export default function App() {
-  return <h1>Matchup Dashboard</h1>;
+  const [data, setData] = useState<MatchupData | null>(null);
+  const [tab, setTab] = useState<Tab>('overview');
+  const [syncing, setSyncing] = useState(false);
+
+  useEffect(() => {
+    loadData().then(setData);
+  }, []);
+
+  const handleSync = () => {
+    setSyncing(true);
+    // Sync flow wired in Task 13.
+    setTimeout(() => setSyncing(false), 2000);
+  };
+
+  const tabs: { id: Tab; label: string }[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'headtohead', label: 'Head-to-Head' },
+    { id: 'leaderboard', label: 'Leaderboard' },
+    { id: 'brackets', label: 'Brackets' },
+  ];
+
+  return (
+    <div>
+      <header>
+        <h1>Matchup Dashboard</h1>
+        <SyncButton onSync={handleSync} syncing={syncing} />
+      </header>
+      <nav>
+        {tabs.map((t) => (
+          <button key={t.id} onClick={() => setTab(t.id)}>
+            {t.label}
+          </button>
+        ))}
+      </nav>
+      <main>
+        {data === null ? (
+          <p>No data yet. Click Sync to pull your brackets from lvup.gg.</p>
+        ) : (
+          <>
+            {tab === 'overview' && <Overview data={data} />}
+            {tab === 'headtohead' && <HeadToHead data={data} />}
+            {tab === 'leaderboard' && <Leaderboard data={data} />}
+            {tab === 'brackets' && <Brackets data={data} />}
+          </>
+        )}
+      </main>
+    </div>
+  );
 }

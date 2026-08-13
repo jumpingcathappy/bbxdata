@@ -1,0 +1,26 @@
+{
+  "exportedAt": "2026-08-13T10:00:00Z",
+  "brackets": [
+    {
+      "id": "b1",
+      "name": "Weekly Smash",
+      "type": "single-elimination",
+      "createdAt": "2026-07-01T00:00:00Z",
+      "matches": [
+        { "id": "m1", "round": 1, "playerA": "Alice", "playerB": "Bob", "winner": "Alice", "scoreA": 2, "scoreB": 1 },
+        { "id": "m2", "round": 1, "playerA": "Carol", "playerB": "Dave", "winner": "Dave", "scoreA": 0, "scoreB": 2 },
+        { "id": "m3", "round": 2, "playerA": "Alice", "playerB": "Dave", "winner": "Alice", "scoreA": 2, "scoreB": 0 }
+      ]
+    },
+    {
+      "id": "b2",
+      "name": "Friday FFA",
+      "type": "free-for-all",
+      "createdAt": "2026-07-08T00:00:00Z",
+      "matches": [
+        { "id": "m4", "round": 1, "playerA": "Alice", "playerB": "Bob", "winner": "Bob", "scoreA": 1, "scoreB": 2 },
+        { "id": "m5", "round": 1, "playerA": "Carol", "playerB": "Alice", "winner": null, "scoreA": null, "scoreB": null }
+      ]
+    }
+  ]
+}

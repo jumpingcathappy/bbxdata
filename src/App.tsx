@@ -29,7 +29,14 @@ export default function App() {
 
   const handleSync = () => {
     setSyncing(true);
-    openSyncPopup();
+    const popup = openSyncPopup();
+    if (!popup) {
+      alert('Popup blocked. Please allow popups for this site.');
+      setSyncing(false);
+      return;
+    }
+    // Reset syncing state if the popup flow doesn't complete within 60s.
+    window.setTimeout(() => setSyncing(false), 60000);
   };
 
   const tabs: { id: Tab; label: string }[] = [

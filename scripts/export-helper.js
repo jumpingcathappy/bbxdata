@@ -25,25 +25,42 @@
     cursor += size;
   }
 
-  // Phase 2: normalize each bracket. Rosters are embedded in overlaySetting.rosters.
+  // Phase 2: for each bracket, fetch the detail endpoint which contains
+  // rosters (overlaySetting.rosters) AND matchResults together.
   const normalized = [];
   for (const b of brackets) {
     const id = b.easyBracketId;
     const type = (b.bracketType || '').toLowerCase();
-    const rosters = (b.overlaySetting && b.overlaySetting.rosters) || [];
-    const nameById = new Map(rosters.map((r) => [r.id, r.name || 'Unknown']));
+    let matches = [];
+    try {
+      const detail = await get(`/easy-brackets/${id}`);
+      const body = detail.body || {};
+      const rosters = (body.overlaySetting && body.overlaySetting.rosters) || [];
+      const nameById = new Map(rosters.map((r) => [r.id, r.name || 'Unknown']));
 
-    // matchResults is empty until brackets are played. Map best-effort when present.
-    const matches = (b.matchResults || []).map((m) => ({
-      id: m.matchId || m.id || '',
-      round: m.round ?? 0,
-      playerA: nameById.get(m.teamAId) || nameById.get(m.teamId) || 'Unknown',
-      playerB: nameById.get(m.teamBId) || 'Unknown',
-      winner: m.winnerTeamId ? nameById.get(m.winnerTeamId) : null,
-      scoreA: m.scoreA ?? null,
-      scoreB: m.scoreB ?? null,
-    }));
-
+      // matchResults: each match is TWO entries (winner status:"win", loser
+      // status:"lose") sharing the same round, referencing each other via
+      // opponents[]. Build a map teamId -> entry, then emit one Match per
+      // winning entry.
+      const results = Array.isArray(body.matchResults) ? body.matchResults : [];
+      const byTeam = new Map(results.map((r) => [r.teamId, r]));
+      for (const r of results) {
+        if (r.status !== 'win') continue;
+        const oppId = (r.opponents || [])[0];
+        const opp = oppId ? byTeam.get(oppId) : null;
+        matches.push({
+          id: `${id}-r${r.round}-${r.teamId}`,
+          round: r.round,
+          playerA: nameById.get(r.teamId) || 'Unknown',
+          playerB: opp ? nameById.get(opp.teamId) || 'Unknown' : 'Unknown',
+          winner: nameById.get(r.teamId) || 'Unknown',
+          scoreA: r.gameWin ?? null,
+          scoreB: opp ? opp.gameWin ?? null : null,
+        });
+      }
+    } catch (e) {
+      console.warn('Skipping bracket', id, e);
+    }
     normalized.push({
       id,
       name: b.title || `Bracket ${id}`,

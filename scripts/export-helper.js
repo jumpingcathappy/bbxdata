@@ -12,49 +12,43 @@
     return res.json();
   };
 
-  // Phase 1: list the user's brackets (paginated)
+  // Phase 1: list the user's brackets (paginated via body.hasNext)
   const brackets = [];
   let cursor = 0;
   const size = 100;
   for (;;) {
     const list = await get(`/easy-brackets/users/me2?cursor=${cursor}&size=${size}`);
-    const items = list.body?.brackets || list.body || [];
+    const body = list.body || {};
+    const items = Array.isArray(body.items) ? body.items : [];
     brackets.push(...items);
-    if (items.length < size) break;
+    if (!body.hasNext) break;
     cursor += size;
   }
 
-  // Phase 2: for each bracket, fetch rosters + type-specific matches
+  // Phase 2: normalize each bracket. Rosters are embedded in overlaySetting.rosters.
   const normalized = [];
   for (const b of brackets) {
-    const id = b.id;
-    const type = (b.type || '').toLowerCase();
-    const matches = [];
-    try {
-      const rosters = await get(`/easy-brackets/${id}/rosters`);
-      const rosterList = rosters.body || [];
-      const nameById = new Map(rosterList.map((r) => [r.id, r.nickname || r.name || 'Unknown']));
-      const matchRes = await get(`/easy-brackets/${id}/${type}/matches`);
-      const rawMatches = matchRes.body || [];
-      for (const m of rawMatches) {
-        matches.push({
-          id: m.id,
-          round: m.round,
-          playerA: nameById.get(m.teamAId) || nameById.get(m.teamId) || 'Unknown',
-          playerB: nameById.get(m.teamBId) || 'Unknown',
-          winner: m.winnerTeamId ? nameById.get(m.winnerTeamId) : null,
-          scoreA: m.scoreA ?? null,
-          scoreB: m.scoreB ?? null,
-        });
-      }
-    } catch (e) {
-      console.warn('Skipping bracket', id, e);
-    }
+    const id = b.easyBracketId;
+    const type = (b.bracketType || '').toLowerCase();
+    const rosters = (b.overlaySetting && b.overlaySetting.rosters) || [];
+    const nameById = new Map(rosters.map((r) => [r.id, r.name || 'Unknown']));
+
+    // matchResults is empty until brackets are played. Map best-effort when present.
+    const matches = (b.matchResults || []).map((m) => ({
+      id: m.matchId || m.id || '',
+      round: m.round ?? 0,
+      playerA: nameById.get(m.teamAId) || nameById.get(m.teamId) || 'Unknown',
+      playerB: nameById.get(m.teamBId) || 'Unknown',
+      winner: m.winnerTeamId ? nameById.get(m.winnerTeamId) : null,
+      scoreA: m.scoreA ?? null,
+      scoreB: m.scoreB ?? null,
+    }));
+
     normalized.push({
       id,
-      name: b.name || b.title || `Bracket ${id}`,
+      name: b.title || `Bracket ${id}`,
       type,
-      createdAt: b.createdAt || b.createdDate || '',
+      createdAt: b.createdDatetime ? new Date(b.createdDatetime).toISOString() : '',
       matches,
     });
   }

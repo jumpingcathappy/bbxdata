@@ -6,15 +6,19 @@ function BracketMatches({ bracket }: { bracket: Bracket }) {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <button onClick={() => setOpen(!open)}>
+      <button className="btn-ghost" onClick={() => setOpen(!open)}>
         {open ? 'Hide matches' : 'Show matches'}
       </button>
       {open && (
-        <ul>
+        <ul className="match-list">
           {bracket.matches.map((m) => (
             <li key={m.id}>
               R{m.round}: {m.playerA} vs {m.playerB} — winner:{' '}
-              {m.winner ?? 'undecided'}
+              {m.winner ? (
+                <span className="winner">{m.winner}</span>
+              ) : (
+                <span className="undecided">undecided</span>
+              )}
             </li>
           ))}
         </ul>
@@ -25,40 +29,42 @@ function BracketMatches({ bracket }: { bracket: Bracket }) {
 
 export default function Brackets({ data }: { data: MatchupData }) {
   return (
-    <section>
+    <section className="section">
       <h2>Brackets</h2>
       {data.brackets.length === 0 ? (
-        <p>No brackets yet.</p>
+        <p className="empty">No brackets yet.</p>
       ) : (
-        <SortableTable
-          columns={[
-            { key: 'name', label: 'Name' },
-            { key: 'type', label: 'Type' },
-            {
-              key: 'createdAt',
-              label: 'Created',
-              sortValue: (b) => b.createdAt,
-              render: (b) =>
-                b.createdAt ? new Date(b.createdAt).toLocaleDateString() : '—',
-            },
-            {
-              key: 'matches',
-              label: 'Matches',
-              sortValue: (b) => b.matches.length,
-              render: (b) => String(b.matches.length),
-            },
-            {
-              key: 'details',
-              label: 'Details',
-              sortValue: () => 0,
-              render: (b) => <BracketMatches bracket={b} />,
-            },
-          ]}
-          rows={data.brackets}
-          rowKey={(b) => b.id}
-          defaultSortKey="name"
-          emptyMessage="No brackets yet."
-        />
+        <div className="table-wrap">
+          <SortableTable
+            columns={[
+              { key: 'name', label: 'Name' },
+              { key: 'type', label: 'Type' },
+              {
+                key: 'createdAt',
+                label: 'Created',
+                sortValue: (b) => b.createdAt,
+                render: (b) =>
+                  b.createdAt ? new Date(b.createdAt).toLocaleDateString() : '—',
+              },
+              {
+                key: 'matches',
+                label: 'Matches',
+                sortValue: (b) => b.matches.length,
+                render: (b) => String(b.matches.length),
+              },
+              {
+                key: 'details',
+                label: 'Details',
+                sortValue: () => 0,
+                render: (b) => <BracketMatches bracket={b} />,
+              },
+            ]}
+            rows={data.brackets}
+            rowKey={(b) => b.id}
+            defaultSortKey="name"
+            emptyMessage="No brackets yet."
+          />
+        </div>
       )}
     </section>
   );

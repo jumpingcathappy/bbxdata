@@ -27,12 +27,14 @@ export default function HeadToHead({ data }: { data: MatchupData }) {
   }, [records, filter]);
 
   return (
-    <section>
+    <section className="section">
       <h2>Head-to-Head</h2>
 
-      <label>
-        Filter by contestant:{' '}
+      <div className="filter-row">
+        <label htmlFor="h2h-filter">Filter by contestant:</label>
         <input
+          id="h2h-filter"
+          className="input"
           type="text"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
@@ -44,26 +46,28 @@ export default function HeadToHead({ data }: { data: MatchupData }) {
             <option key={p} value={p} />
           ))}
         </datalist>
-      </label>
+      </div>
 
-      <SortableTable
-        columns={[
-          { key: 'playerA', label: 'Player A' },
-          { key: 'playerB', label: 'Player B' },
-          { key: 'aWins', label: 'A Wins' },
-          { key: 'bWins', label: 'B Wins' },
-          {
-            key: 'winRate',
-            label: 'A Win Rate',
-            sortValue: (r) => r.winRate,
-            render: (r) => `${(r.winRate * 100).toFixed(1)}%`,
-          },
-        ]}
-        rows={filtered}
-        rowKey={(r) => `${r.playerA}-${r.playerB}`}
-        defaultSortKey="playerA"
-        emptyMessage="No decided matchups yet."
-      />
+      <div className="table-wrap">
+        <SortableTable
+          columns={[
+            { key: 'playerA', label: 'Player A' },
+            { key: 'playerB', label: 'Player B' },
+            { key: 'aWins', label: 'A Wins' },
+            { key: 'bWins', label: 'B Wins' },
+            {
+              key: 'winRate',
+              label: 'A Win Rate',
+              sortValue: (r) => r.winRate,
+              render: (r) => `${(r.winRate * 100).toFixed(1)}%`,
+            },
+          ]}
+          rows={filtered}
+          rowKey={(r) => `${r.playerA}-${r.playerB}`}
+          defaultSortKey="playerA"
+          emptyMessage="No decided matchups yet."
+        />
+      </div>
     </section>
   );
 }

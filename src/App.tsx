@@ -47,21 +47,27 @@ export default function App() {
   ];
 
   return (
-    <div>
-      <header>
+    <div className="app">
+      <header className="app-header">
         <h1>Matchup Dashboard</h1>
         <SyncButton onSync={handleSync} syncing={syncing} />
       </header>
-      <nav>
+      <nav className="tabs">
         {tabs.map((t) => (
-          <button key={t.id} onClick={() => setTab(t.id)}>
+          <button
+            key={t.id}
+            className={`tab-btn${tab === t.id ? ' active' : ''}`}
+            onClick={() => setTab(t.id)}
+          >
             {t.label}
           </button>
         ))}
       </nav>
       <main>
         {data === null ? (
-          <p>No data yet. Click Sync to pull your brackets from lvup.gg.</p>
+          <p className="empty">
+            No data yet. Click Sync to pull your brackets from lvup.gg.
+          </p>
         ) : (
           <>
             {tab === 'overview' && <Overview data={data} />}

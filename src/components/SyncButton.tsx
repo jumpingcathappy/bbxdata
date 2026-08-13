@@ -5,7 +5,7 @@ interface Props {
 
 export default function SyncButton({ onSync, syncing }: Props) {
   return (
-    <button onClick={onSync} disabled={syncing}>
+    <button className="btn" onClick={onSync} disabled={syncing}>
       {syncing ? 'Syncing…' : 'Sync'}
     </button>
   );

@@ -11,19 +11,13 @@ export default function HeadToHead({ data }: { data: MatchupData }) {
     const set = new Set<string>();
     for (const r of records) {
       set.add(r.playerA);
-      set.add(r.playerB);
     }
     return Array.from(set).sort();
   }, [records]);
 
   const filtered = useMemo(() => {
-    const q = filter.trim().toLowerCase();
-    if (!q) return records;
-    return records.filter(
-      (r) =>
-        r.playerA.toLowerCase().includes(q) ||
-        r.playerB.toLowerCase().includes(q)
-    );
+    if (!filter) return records;
+    return records.filter((r) => r.playerA === filter);
   }, [records, filter]);
 
   return (
@@ -31,21 +25,20 @@ export default function HeadToHead({ data }: { data: MatchupData }) {
       <h2>Head-to-Head</h2>
 
       <div className="filter-row">
-        <label htmlFor="h2h-filter">Filter by contestant:</label>
-        <input
+        <label htmlFor="h2h-filter">Filter by Player A:</label>
+        <select
           id="h2h-filter"
           className="input"
-          type="text"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          placeholder="Type a player name…"
-          list="h2h-players"
-        />
-        <datalist id="h2h-players">
+        >
+          <option value="">All players</option>
           {players.map((p) => (
-            <option key={p} value={p} />
+            <option key={p} value={p}>
+              {p}
+            </option>
           ))}
-        </datalist>
+        </select>
       </div>
 
       <div className="table-wrap">

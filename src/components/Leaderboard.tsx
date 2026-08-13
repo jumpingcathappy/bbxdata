@@ -1,5 +1,6 @@
 import type { MatchupData } from '../types';
 import { computeLeaderboard } from '../lib/stats';
+import SortableTable from './SortableTable';
 
 export default function Leaderboard({ data }: { data: MatchupData }) {
   const entries = computeLeaderboard(data);
@@ -7,34 +8,31 @@ export default function Leaderboard({ data }: { data: MatchupData }) {
   return (
     <section>
       <h2>Leaderboard</h2>
-      {entries.length === 0 ? (
-        <p>No players yet.</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Player</th>
-              <th>Wins</th>
-              <th>Losses</th>
-              <th>Total</th>
-              <th>Win Rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {entries.map((e, i) => (
-              <tr key={e.player}>
-                <td>{i + 1}</td>
-                <td>{e.player}</td>
-                <td>{e.wins}</td>
-                <td>{e.losses}</td>
-                <td>{e.total}</td>
-                <td>{(e.winRate * 100).toFixed(1)}%</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <SortableTable
+        columns={[
+          {
+            key: 'rank',
+            label: '#',
+            sortValue: (e) => e.wins,
+            render: (_e, i) => String(i + 1),
+          },
+          { key: 'player', label: 'Player' },
+          { key: 'wins', label: 'Wins' },
+          { key: 'losses', label: 'Losses' },
+          { key: 'total', label: 'Total' },
+          {
+            key: 'winRate',
+            label: 'Win Rate',
+            sortValue: (e) => e.winRate,
+            render: (e) => `${(e.winRate * 100).toFixed(1)}%`,
+          },
+        ]}
+        rows={entries}
+        rowKey={(e) => e.player}
+        defaultSortKey="wins"
+        defaultSortDir="desc"
+        emptyMessage="No players yet."
+      />
     </section>
   );
 }

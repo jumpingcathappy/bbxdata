@@ -117,6 +117,38 @@ describe('computeHeadToHead', () => {
   });
 });
 
+describe('computeHeadToHead win rate', () => {
+  it('computes playerA win rate as aWins / (aWins + bWins)', () => {
+    const h2hData: MatchupData = {
+      exportedAt: '2026-08-13T10:00:00Z',
+      brackets: [
+        {
+          id: 'b1',
+          name: 'B1',
+          type: 'single-elimination',
+          createdAt: '2026-07-01T00:00:00Z',
+          matches: [
+            { id: 'm1', round: 1, playerA: 'Alice', playerB: 'Bob', winner: 'Alice', scoreA: 2, scoreB: 1 },
+            { id: 'm2', round: 1, playerA: 'Alice', playerB: 'Bob', winner: 'Alice', scoreA: 2, scoreB: 0 },
+            { id: 'm3', round: 1, playerA: 'Alice', playerB: 'Bob', winner: 'Bob', scoreA: 1, scoreB: 2 }
+          ]
+        }
+      ]
+    };
+    const result = computeHeadToHead(h2hData);
+    const rec = result.find((r) => r.playerA === 'Alice' && r.playerB === 'Bob');
+    expect(rec).toBeDefined();
+    expect(rec!.aWins).toBe(2);
+    expect(rec!.bWins).toBe(1);
+    expect(rec!.winRate).toBeCloseTo(2 / 3);
+  });
+
+  it('returns 0 win rate when no matches between the pair', () => {
+    const empty: MatchupData = { exportedAt: '', brackets: [] };
+    expect(computeHeadToHead(empty)).toEqual([]);
+  });
+});
+
 describe('computeHeadToHead swapped ordering', () => {
   it('routes wins correctly when the same pair has swapped player order', () => {
     const swappedData: MatchupData = {

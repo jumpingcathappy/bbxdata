@@ -23,6 +23,7 @@ export interface HeadToHeadRecord {
   playerB: string;
   aWins: number;
   bWins: number;
+  winRate: number;
 }
 
 export function computeHeadToHead(data: MatchupData): HeadToHeadRecord[] {
@@ -36,14 +37,20 @@ export function computeHeadToHead(data: MatchupData): HeadToHeadRecord[] {
       const k = key(match.playerA, match.playerB);
       let rec = map.get(k);
       if (!rec) {
-        rec = { playerA, playerB, aWins: 0, bWins: 0 };
+        rec = { playerA, playerB, aWins: 0, bWins: 0, winRate: 0 };
         map.set(k, rec);
       }
       if (match.winner === playerA) rec.aWins += 1;
       else if (match.winner === playerB) rec.bWins += 1;
     }
   }
-  return Array.from(map.values());
+
+  const records = Array.from(map.values());
+  for (const r of records) {
+    const total = r.aWins + r.bWins;
+    r.winRate = total === 0 ? 0 : r.aWins / total;
+  }
+  return records;
 }
 
 export interface LeaderboardEntry {

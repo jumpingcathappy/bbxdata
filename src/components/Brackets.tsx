@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import type { Bracket, MatchupData } from '../types';
+import SortableTable from './SortableTable';
 
-function BracketCard({ bracket }: { bracket: Bracket }) {
+function BracketMatches({ bracket }: { bracket: Bracket }) {
   const [open, setOpen] = useState(false);
   return (
     <div>
       <button onClick={() => setOpen(!open)}>
-        {bracket.name} ({bracket.type}) — {bracket.matches.length} matches
+        {open ? 'Hide matches' : 'Show matches'}
       </button>
       {open && (
         <ul>
@@ -29,7 +30,35 @@ export default function Brackets({ data }: { data: MatchupData }) {
       {data.brackets.length === 0 ? (
         <p>No brackets yet.</p>
       ) : (
-        data.brackets.map((b) => <BracketCard key={b.id} bracket={b} />)
+        <SortableTable
+          columns={[
+            { key: 'name', label: 'Name' },
+            { key: 'type', label: 'Type' },
+            {
+              key: 'createdAt',
+              label: 'Created',
+              sortValue: (b) => b.createdAt,
+              render: (b) =>
+                b.createdAt ? new Date(b.createdAt).toLocaleDateString() : '—',
+            },
+            {
+              key: 'matches',
+              label: 'Matches',
+              sortValue: (b) => b.matches.length,
+              render: (b) => String(b.matches.length),
+            },
+            {
+              key: 'details',
+              label: 'Details',
+              sortValue: () => 0,
+              render: (b) => <BracketMatches bracket={b} />,
+            },
+          ]}
+          rows={data.brackets}
+          rowKey={(b) => b.id}
+          defaultSortKey="name"
+          emptyMessage="No brackets yet."
+        />
       )}
     </section>
   );

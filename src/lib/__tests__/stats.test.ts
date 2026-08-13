@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { computeOverall, computeHeadToHead, computeLeaderboard } from '../stats';
+import { computeOverall, computeHeadToHead, computeLeaderboard, computePlayerMatchups } from '../stats';
 import type { MatchupData } from '../../types';
 
 const data: MatchupData = {
@@ -183,5 +183,28 @@ describe('computeLeaderboard', () => {
     expect(result[0].wins).toBe(2);
     expect(result[0].losses).toBe(1);
     expect(result[0].total).toBe(3);
+  });
+});
+
+describe('computePlayerMatchups', () => {
+  it('shows a player record from their perspective regardless of A/B slot', () => {
+    const result = computePlayerMatchups(data, 'Alice');
+    // Alice vs Bob: Alice won m1, Bob won m4 -> 1-1
+    const bob = result.find((r) => r.opponent === 'Bob');
+    expect(bob).toBeDefined();
+    expect(bob!.wins).toBe(1);
+    expect(bob!.losses).toBe(1);
+    expect(bob!.total).toBe(2);
+    expect(bob!.winRate).toBeCloseTo(0.5);
+    // Alice vs Dave: Alice won m3 -> 1-0
+    const dave = result.find((r) => r.opponent === 'Dave');
+    expect(dave).toBeDefined();
+    expect(dave!.wins).toBe(1);
+    expect(dave!.losses).toBe(0);
+    expect(dave!.winRate).toBe(1);
+  });
+
+  it('returns empty array for a player with no matches', () => {
+    expect(computePlayerMatchups(data, 'Nobody')).toEqual([]);
   });
 });

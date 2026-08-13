@@ -61,6 +61,53 @@ export interface LeaderboardEntry {
   winRate: number;
 }
 
+export interface PlayerMatchup {
+  opponent: string;
+  wins: number;
+  losses: number;
+  total: number;
+  winRate: number;
+}
+
+export function computePlayerMatchups(
+  data: MatchupData,
+  player: string
+): PlayerMatchup[] {
+  const map = new Map<string, PlayerMatchup>();
+  const ensure = (opponent: string): PlayerMatchup => {
+    let e = map.get(opponent);
+    if (!e) {
+      e = { opponent, wins: 0, losses: 0, total: 0, winRate: 0 };
+      map.set(opponent, e);
+    }
+    return e;
+  };
+
+  for (const bracket of data.brackets) {
+    for (const match of bracket.matches) {
+      if (match.winner === null) continue;
+      if (match.playerA === player) {
+        const rec = ensure(match.playerB);
+        rec.total += 1;
+        if (match.winner === player) rec.wins += 1;
+        else rec.losses += 1;
+      } else if (match.playerB === player) {
+        const rec = ensure(match.playerA);
+        rec.total += 1;
+        if (match.winner === player) rec.wins += 1;
+        else rec.losses += 1;
+      }
+    }
+  }
+
+  const entries = Array.from(map.values());
+  for (const e of entries) {
+    e.winRate = e.total === 0 ? 0 : e.wins / e.total;
+  }
+  entries.sort((x, y) => y.wins - x.wins || y.winRate - x.winRate);
+  return entries;
+}
+
 export function computeLeaderboard(data: MatchupData): LeaderboardEntry[] {
   const map = new Map<string, LeaderboardEntry>();
   const ensure = (name: string): LeaderboardEntry => {

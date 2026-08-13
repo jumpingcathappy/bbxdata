@@ -38,6 +38,21 @@ export default function Brackets({ data }: { data: MatchupData }) {
           <SortableTable
             columns={[
               { key: 'name', label: 'Name' },
+              {
+                key: 'link',
+                label: 'Link',
+                sortValue: () => 0,
+                render: (b) => (
+                  <a
+                    className="bracket-link"
+                    href={`https://lvup.gg/en/easy/bracket/${b.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open bracket ↗
+                  </a>
+                ),
+              },
               { key: 'type', label: 'Type' },
               {
                 key: 'createdAt',

@@ -233,6 +233,18 @@ tbody tr:hover {
   background: var(--bg-hover);
 }
 
+/* ---------- Bracket link ---------- */
+.bracket-link {
+  color: var(--accent-hover);
+  text-decoration: none;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.bracket-link:hover {
+  text-decoration: underline;
+}
+
 /* ---------- Inputs ---------- */
 .input {
   background: var(--bg);

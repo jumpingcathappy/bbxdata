@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-21T06:05:06.562Z",
+  "exportedAt": "2026-08-21T07:43:54.706Z",
   "brackets": [
     {
       "id": "6a87d9c194f4df000752443c",
@@ -319,53 +319,7 @@
       "name": "Swiss",
       "type": "single_elimination",
       "createdAt": "2026-08-17T05:33:37.993Z",
-      "matches": [
-        {
-          "id": "6a829d31e1c99f0007d87d10-r1-4XeJPBjGRlIef1zOKkcX7",
-          "round": 1,
-          "playerA": "Alan Sir",
-          "playerB": "Natalie",
-          "winner": "Alan Sir",
-          "scoreA": 1,
-          "scoreB": 0
-        },
-        {
-          "id": "6a829d31e1c99f0007d87d10-r1-9LgyRcPkWra-itTBoNG-C",
-          "round": 1,
-          "playerA": "Keith",
-          "playerB": "Jojo",
-          "winner": "Keith",
-          "scoreA": 2,
-          "scoreB": 0
-        },
-        {
-          "id": "6a829d31e1c99f0007d87d10-r1-WhD3cmCkBIHr9rnT-1500",
-          "round": 1,
-          "playerA": "Rockman",
-          "playerB": "Issac",
-          "winner": "Rockman",
-          "scoreA": 1,
-          "scoreB": 0
-        },
-        {
-          "id": "6a829d31e1c99f0007d87d10-r1-e44rVLqg5Ec2I6E6KEvue",
-          "round": 1,
-          "playerA": "Alvin",
-          "playerB": "Yin",
-          "winner": "Alvin",
-          "scoreA": 2,
-          "scoreB": 0
-        },
-        {
-          "id": "6a829d31e1c99f0007d87d10-r1-pSQRdx5Saxf7E-XxaqRCE",
-          "round": 1,
-          "playerA": "Tim",
-          "playerB": "Michelle",
-          "winner": "Tim",
-          "scoreA": 3,
-          "scoreB": 0
-        }
-      ]
+      "matches": []
     },
     {
       "id": "6a7d58d288e93f0008b75f21",

@@ -416,6 +416,23 @@ tbody tr:hover {
   font-size: 0.78rem;
 }
 
+.chart-legend-btn.focused {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ---------- Trend match detail ---------- */
+.trend-detail {
+  margin-top: 24px;
+}
+
+.trend-detail h3 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
 /* ---------- Auth gate ---------- */
 .auth-gate {
   display: flex;

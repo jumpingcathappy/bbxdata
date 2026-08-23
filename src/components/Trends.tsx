@@ -16,6 +16,7 @@ const PAD = { top: 20, right: 20, bottom: 40, left: 50 };
 export default function Trends({ data }: { data: MatchupData }) {
   const trends = useMemo(() => computeWinRateTrend(data), [data]);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
+  const [focus, setFocus] = useState<string>('');
 
   const visibleTrends = useMemo(
     () => trends.filter((t) => !hidden.has(t.player)),
@@ -28,12 +29,23 @@ export default function Trends({ data }: { data: MatchupData }) {
   );
 
   const togglePlayer = (player: string) => {
+    setFocus('');
     setHidden((prev) => {
       const next = new Set(prev);
       if (next.has(player)) next.delete(player);
       else next.add(player);
       return next;
     });
+  };
+
+  const focusPlayer = (player: string) => {
+    if (!player) {
+      setFocus('');
+      setHidden(new Set());
+      return;
+    }
+    setFocus(player);
+    setHidden(new Set(trends.filter((t) => t.player !== player).map((t) => t.player)));
   };
 
   if (trends.length === 0) {
@@ -75,12 +87,38 @@ export default function Trends({ data }: { data: MatchupData }) {
       .join(' ');
   };
 
+  // Focused player's match detail list
+  const focusedTrend = focus ? trends.find((t) => t.player === focus) : null;
+
   return (
     <section className="section">
       <h2>Win Rate Trends</h2>
       <p className="empty" style={{ marginBottom: 16 }}>
         Cumulative win rate over time (chronological by bracket date &amp; round).
       </p>
+
+      {/* Focus selector */}
+      <div className="filter-row">
+        <label htmlFor="trend-focus">Focus Player:</label>
+        <select
+          id="trend-focus"
+          className="input"
+          value={focus}
+          onChange={(e) => focusPlayer(e.target.value)}
+        >
+          <option value="">All players</option>
+          {trends.map((t) => (
+            <option key={t.player} value={t.player}>
+              {t.player}
+            </option>
+          ))}
+        </select>
+        {focus && (
+          <button className="btn-ghost" onClick={() => focusPlayer('')}>
+            Show All
+          </button>
+        )}
+      </div>
 
       <div className="chart-container">
         <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} className="chart-svg">
@@ -133,13 +171,14 @@ export default function Trends({ data }: { data: MatchupData }) {
           {/* Player lines */}
           {visibleTrends.map((trend) => {
             const color = playerColor(trend.player);
+            const dimmed = focus && focus !== trend.player;
             return (
-              <g key={trend.player}>
+              <g key={trend.player} style={dimmed ? { display: 'none' } : undefined}>
                 <path
                   d={buildPath(trend)}
                   fill="none"
                   stroke={color}
-                  strokeWidth={2}
+                  strokeWidth={focus === trend.player ? 3 : 2}
                   className="chart-line"
                 />
                 {/* End dot + label */}
@@ -166,6 +205,41 @@ export default function Trends({ data }: { data: MatchupData }) {
         </svg>
       </div>
 
+      {/* Focused player match history */}
+      {focusedTrend && (
+        <div className="trend-detail">
+          <h3>{focus}'s Match-by-Match History</h3>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Opponent</th>
+                  <th>Result</th>
+                  <th>Win Rate After</th>
+                  <th>Record</th>
+                </tr>
+              </thead>
+              <tbody>
+                {focusedTrend.points.map((p, i) => (
+                  <tr key={i}>
+                    <td>{p.matchIndex}</td>
+                    <td>{p.opponent}</td>
+                    <td>
+                      <span className={p.won ? 'streak-win' : 'streak-loss'}>
+                        {p.won ? 'Win' : 'Loss'}
+                      </span>
+                    </td>
+                    <td>{(p.winRate * 100).toFixed(1)}%</td>
+                    <td>{p.wins}W–{p.total - p.wins}L</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
       {/* Player toggles */}
       <div className="chart-legend">
         {trends.map((t) => {
@@ -174,7 +248,7 @@ export default function Trends({ data }: { data: MatchupData }) {
           return (
             <button
               key={t.player}
-              className={`chart-legend-btn${isHidden ? ' hidden' : ''}`}
+              className={`chart-legend-btn${isHidden ? ' hidden' : ''}${focus === t.player ? ' focused' : ''}`}
               onClick={() => togglePlayer(t.player)}
             >
               <span className="chart-legend-dot" style={{ background: color }} />

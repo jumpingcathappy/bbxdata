@@ -194,6 +194,72 @@ export function computeHeadToHead(data: MatchupData): HeadToHeadRecord[] {
   return records;
 }
 
+// ── Win rate trend ───────────────────────────────────────────────
+
+export interface TrendPoint {
+  matchIndex: number;     // 1-based sequential index across the player's matches
+  winRate: number;        // cumulative wins / total matches so far (0–1)
+  wins: number;
+  total: number;
+  opponent: string;
+  won: boolean;
+}
+
+export interface PlayerTrend {
+  player: string;
+  points: TrendPoint[];
+}
+
+export function computeWinRateTrend(data: MatchupData): PlayerTrend[] {
+  const map = new Map<string, TrendPoint[]>();
+  const ensure = (name: string): TrendPoint[] => {
+    let arr = map.get(name);
+    if (!arr) { arr = []; map.set(name, arr); }
+    return arr;
+  };
+
+  // Collect all matches with bracket date for sorting
+  interface Entry { player: string; opponent: string; won: boolean; bracketCreatedAt: string; round: number; }
+  const entries: Entry[] = [];
+  for (const bracket of data.brackets) {
+    for (const match of bracket.matches) {
+      if (match.winner === null) continue;
+      const wonA = match.winner === match.playerA;
+      entries.push({ player: match.playerA, opponent: match.playerB, won: wonA, bracketCreatedAt: bracket.createdAt, round: match.round });
+      entries.push({ player: match.playerB, opponent: match.playerA, won: !wonA, bracketCreatedAt: bracket.createdAt, round: match.round });
+    }
+  }
+
+  // Sort chronologically
+  entries.sort((a, b) => {
+    const t = a.bracketCreatedAt.localeCompare(b.bracketCreatedAt);
+    if (t !== 0) return t;
+    return a.round - b.round;
+  });
+
+  // Build cumulative trend per player
+  const stats = new Map<string, { wins: number; total: number }>();
+  for (const e of entries) {
+    const s = stats.get(e.player) ?? { wins: 0, total: 0 };
+    s.total += 1;
+    if (e.won) s.wins += 1;
+    stats.set(e.player, s);
+    const arr = ensure(e.player);
+    arr.push({
+      matchIndex: arr.length + 1,
+      winRate: s.wins / s.total,
+      wins: s.wins,
+      total: s.total,
+      opponent: e.opponent,
+      won: e.won,
+    });
+  }
+
+  const result = Array.from(map.entries()).map(([player, points]) => ({ player, points }));
+  result.sort((a, b) => b.points.length - a.points.length);
+  return result;
+}
+
 // ── Leaderboard ──────────────────────────────────────────────────
 
 export interface LeaderboardEntry {

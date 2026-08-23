@@ -308,6 +308,17 @@ tbody tr:hover {
   color: var(--red);
 }
 
+/* ---------- Streak badges ---------- */
+.streak-win {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.streak-loss {
+  color: var(--red);
+  font-weight: 600;
+}
+
 /* ---------- Auth gate ---------- */
 .auth-gate {
   display: flex;

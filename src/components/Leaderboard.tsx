@@ -2,6 +2,12 @@ import type { MatchupData } from '../types';
 import { computeLeaderboard } from '../lib/stats';
 import SortableTable from './SortableTable';
 
+function streakCell(type: 'win' | 'loss' | 'none', count: number): string {
+  if (type === 'none' || count === 0) return '—';
+  const label = type === 'win' ? 'W' : 'L';
+  return `${count}${label}`;
+}
+
 export default function Leaderboard({ data }: { data: MatchupData }) {
   const entries = computeLeaderboard(data);
 
@@ -26,6 +32,22 @@ export default function Leaderboard({ data }: { data: MatchupData }) {
               label: 'Win Rate',
               sortValue: (e) => e.winRate,
               render: (e) => `${(e.winRate * 100).toFixed(1)}%`,
+            },
+            {
+              key: 'currentStreak',
+              label: 'Current Streak',
+              sortValue: (e) => e.currentStreakCount,
+              render: (e) => (
+                <span className={e.currentStreakType === 'win' ? 'streak-win' : e.currentStreakType === 'loss' ? 'streak-loss' : ''}>
+                  {streakCell(e.currentStreakType, e.currentStreakCount)}
+                </span>
+              ),
+            },
+            {
+              key: 'longestWinStreak',
+              label: 'Longest Win Streak',
+              sortValue: (e) => e.longestWinStreak,
+              render: (e) => e.longestWinStreak > 0 ? `${e.longestWinStreak}W` : '—',
             },
           ]}
           rows={entries}

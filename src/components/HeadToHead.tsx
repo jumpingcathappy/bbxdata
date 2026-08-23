@@ -3,6 +3,12 @@ import type { MatchupData } from '../types';
 import { computeHeadToHead, computeLeaderboard, computePlayerMatchups } from '../lib/stats';
 import SortableTable from './SortableTable';
 
+function streakCell(type: 'win' | 'loss' | 'none', count: number): string {
+  if (type === 'none' || count === 0) return '—';
+  const label = type === 'win' ? 'W' : 'L';
+  return `${count}${label}`;
+}
+
 export default function HeadToHead({ data }: { data: MatchupData }) {
   const records = computeHeadToHead(data);
   const [filter, setFilter] = useState('');
@@ -72,6 +78,16 @@ export default function HeadToHead({ data }: { data: MatchupData }) {
             </span>
             <span className="stat-label">Overall Win Rate</span>
           </div>
+          <div className="stat-card">
+            <span className="stat-value" style={{ color: selectedPlayer.currentStreakType === 'win' ? 'var(--green)' : selectedPlayer.currentStreakType === 'loss' ? 'var(--red)' : undefined }}>
+              {streakCell(selectedPlayer.currentStreakType, selectedPlayer.currentStreakCount)}
+            </span>
+            <span className="stat-label">Current Streak</span>
+          </div>
+          <div className="stat-card">
+            <span className="stat-value">{selectedPlayer.longestWinStreak}W</span>
+            <span className="stat-label">Best Win Streak</span>
+          </div>
         </div>
       )}
 
@@ -88,6 +104,36 @@ export default function HeadToHead({ data }: { data: MatchupData }) {
                 label: 'Win Rate',
                 sortValue: (r) => r.winRate,
                 render: (r) => `${(r.winRate * 100).toFixed(1)}%`,
+              },
+              {
+                key: 'currentStreak',
+                label: 'Streak',
+                sortValue: (r) => r.currentStreakCount,
+                render: (r) => (
+                  <span className={r.currentStreakType === 'win' ? 'streak-win' : r.currentStreakType === 'loss' ? 'streak-loss' : ''}>
+                    {streakCell(r.currentStreakType, r.currentStreakCount)}
+                  </span>
+                ),
+              },
+              {
+                key: 'lastResult',
+                label: 'Last',
+                sortValue: (r) => (r.lastResult === 'win' ? 1 : r.lastResult === 'loss' ? -1 : 0),
+                render: (r) =>
+                  r.lastResult ? (
+                    <span className={r.lastResult === 'win' ? 'streak-win' : 'streak-loss'}>
+                      {r.lastResult === 'win' ? 'W' : 'L'}
+                    </span>
+                  ) : '—',
+              },
+              {
+                key: 'avgMargin',
+                label: 'Avg Margin',
+                sortValue: (r) => r.avgMargin ?? 0,
+                render: (r) =>
+                  r.avgMargin !== null
+                    ? (r.avgMargin > 0 ? '+' : '') + r.avgMargin.toFixed(1)
+                    : '—',
               },
             ]}
             rows={playerMatchups}
@@ -110,6 +156,37 @@ export default function HeadToHead({ data }: { data: MatchupData }) {
                 label: 'A Win Rate',
                 sortValue: (r) => r.winRate,
                 render: (r) => `${(r.winRate * 100).toFixed(1)}%`,
+              },
+              {
+                key: 'currentStreak',
+                label: 'Hot Streak',
+                sortValue: (r) => r.currentStreakCount,
+                render: (r) =>
+                  r.currentStreakPlayer && r.currentStreakCount > 0
+                    ? `${r.currentStreakPlayer} ${r.currentStreakCount}${r.currentStreakPlayer === r.playerA ? 'W' : 'L'}`
+                    : '—',
+              },
+              {
+                key: 'lastWinner',
+                label: 'Last Winner',
+                sortValue: (r) => r.lastWinner ?? '',
+                render: (r) => r.lastWinner ?? '—',
+              },
+              {
+                key: 'avgMargin',
+                label: 'Avg Margin',
+                sortValue: (r) => r.avgMargin ?? 0,
+                render: (r) =>
+                  r.avgMargin !== null ? r.avgMargin.toFixed(1) : '—',
+              },
+              {
+                key: 'biggestWin',
+                label: 'Biggest Win',
+                sortValue: (r) => r.biggestWinMargin ?? 0,
+                render: (r) =>
+                  r.biggestWinMargin !== null && r.biggestWinner
+                    ? `${r.biggestWinner} (+${r.biggestWinMargin})`
+                    : '—',
               },
             ]}
             rows={filtered}

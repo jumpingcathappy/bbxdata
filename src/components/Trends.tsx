@@ -13,20 +13,49 @@ const CHART_W = 800;
 const CHART_H = 400;
 const PAD = { top: 20, right: 20, bottom: 40, left: 50 };
 
+type ViewMode = 'cumulative' | 'rolling' | 'elo';
+
 export default function Trends({ data }: { data: MatchupData }) {
   const trends = useMemo(() => computeWinRateTrend(data), [data]);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [focus, setFocus] = useState<string>('');
+  const [view, setView] = useState<ViewMode>('cumulative');
 
   const visibleTrends = useMemo(
     () => trends.filter((t) => !hidden.has(t.player)),
     [trends, hidden],
   );
 
+  // Y-axis range depends on view mode
+  const { yMin, yMax, yFormat } = useMemo(() => {
+    if (view === 'elo') {
+      const allElos = trends.flatMap((t) => t.points.map((p) => p.elo));
+      const min = allElos.length ? Math.min(...allElos) : 1000;
+      const max = allElos.length ? Math.max(...allElos) : 1400;
+      const pad = Math.max(20, (max - min) * 0.1);
+      return {
+        yMin: Math.floor((min - pad) / 10) * 10,
+        yMax: Math.ceil((max + pad) / 10) * 10,
+        yFormat: (v: number) => String(Math.round(v)),
+      };
+    }
+    return {
+      yMin: 0,
+      yMax: 1,
+      yFormat: (v: number) => `${(v * 100).toFixed(0)}%`,
+    };
+  }, [trends, view]);
+
   const maxMatches = useMemo(
     () => Math.max(1, ...trends.map((t) => t.points.length)),
     [trends],
   );
+
+  const getValue = (point: { winRate: number; rollingWinRate: number; elo: number }): number => {
+    if (view === 'elo') return point.elo;
+    if (view === 'rolling') return point.rollingWinRate;
+    return point.winRate;
+  };
 
   const togglePlayer = (player: string) => {
     setFocus('');
@@ -61,10 +90,17 @@ export default function Trends({ data }: { data: MatchupData }) {
   const plotW = CHART_W - PAD.left - PAD.right;
   const plotH = CHART_H - PAD.top - PAD.bottom;
   const xScale = (i: number) => PAD.left + (i / Math.max(1, maxMatches - 1)) * plotW;
-  const yScale = (rate: number) => PAD.top + (1 - rate) * plotH;
+  const yScale = (v: number) => {
+    const t = (v - yMin) / Math.max(1, yMax - yMin);
+    return PAD.top + (1 - t) * plotH;
+  };
 
-  // Y-axis ticks (0%, 25%, 50%, 75%, 100%)
-  const yTicks = [0, 0.25, 0.5, 0.75, 1];
+  // Y-axis ticks
+  const yTickCount = 5;
+  const yTicks = Array.from({ length: yTickCount }, (_, i) =>
+    yMin + (i * (yMax - yMin)) / (yTickCount - 1),
+  );
+
   // X-axis ticks
   const xTickCount = Math.min(maxMatches, 8);
   const xTicks = Array.from({ length: xTickCount }, (_, i) =>
@@ -81,7 +117,7 @@ export default function Trends({ data }: { data: MatchupData }) {
     return trend.points
       .map((p, i) => {
         const x = xScale(p.matchIndex);
-        const y = yScale(p.winRate);
+        const y = yScale(getValue(p));
         return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
       })
       .join(' ');
@@ -90,41 +126,64 @@ export default function Trends({ data }: { data: MatchupData }) {
   // Focused player's match detail list
   const focusedTrend = focus ? trends.find((t) => t.player === focus) : null;
 
+  const viewLabels: { id: ViewMode; label: string }[] = [
+    { id: 'cumulative', label: 'Cumulative' },
+    { id: 'rolling', label: 'Rolling (last 10)' },
+    { id: 'elo', label: 'Elo Rating' },
+  ];
+
   return (
     <section className="section">
       <h2>Win Rate Trends</h2>
       <p className="empty" style={{ marginBottom: 16 }}>
-        Cumulative win rate over time (chronological by bracket date &amp; round).
+        {view === 'cumulative' && 'Cumulative win rate over time (chronological by bracket date & round).'}
+        {view === 'rolling' && 'Rolling win rate over last 10 matches — stays responsive even at high match counts.'}
+        {view === 'elo' && 'Elo rating over time — accounts for opponent strength, every match shifts the score.'}
       </p>
 
-      {/* Focus selector */}
-      <div className="filter-row">
-        <label htmlFor="trend-focus">Focus Player:</label>
-        <select
-          id="trend-focus"
-          className="input"
-          value={focus}
-          onChange={(e) => focusPlayer(e.target.value)}
-        >
-          <option value="">All players</option>
-          {trends.map((t) => (
-            <option key={t.player} value={t.player}>
-              {t.player}
-            </option>
+      {/* View toggle + Focus selector */}
+      <div className="filter-row" style={{ flexWrap: 'wrap', gap: 16 }}>
+        <div className="filter-row" style={{ gap: 6, marginBottom: 0 }}>
+          {viewLabels.map((v) => (
+            <button
+              key={v.id}
+              className={`tab-btn${view === v.id ? ' active' : ''}`}
+              style={{ padding: '6px 12px', fontSize: '0.85rem' }}
+              onClick={() => setView(v.id)}
+            >
+              {v.label}
+            </button>
           ))}
-        </select>
-        {focus && (
-          <button className="btn-ghost" onClick={() => focusPlayer('')}>
-            Show All
-          </button>
-        )}
+        </div>
+        <div className="filter-row" style={{ gap: 10, marginBottom: 0 }}>
+          <label htmlFor="trend-focus">Focus:</label>
+          <select
+            id="trend-focus"
+            className="input"
+            style={{ maxWidth: 200 }}
+            value={focus}
+            onChange={(e) => focusPlayer(e.target.value)}
+          >
+            <option value="">All players</option>
+            {trends.map((t) => (
+              <option key={t.player} value={t.player}>
+                {t.player}
+              </option>
+            ))}
+          </select>
+          {focus && (
+            <button className="btn-ghost" onClick={() => focusPlayer('')}>
+              Show All
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="chart-container">
         <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} className="chart-svg">
           {/* Grid lines */}
-          {yTicks.map((t) => (
-            <g key={t}>
+          {yTicks.map((t, i) => (
+            <g key={i}>
               <line
                 x1={PAD.left} y1={yScale(t)}
                 x2={CHART_W - PAD.right} y2={yScale(t)}
@@ -135,7 +194,7 @@ export default function Trends({ data }: { data: MatchupData }) {
                 className="chart-axis-label"
                 textAnchor="end"
               >
-                {(t * 100).toFixed(0)}%
+                {yFormat(t)}
               </text>
             </g>
           ))}
@@ -161,12 +220,14 @@ export default function Trends({ data }: { data: MatchupData }) {
             Match Number
           </text>
 
-          {/* 50% reference line */}
-          <line
-            x1={PAD.left} y1={yScale(0.5)}
-            x2={CHART_W - PAD.right} y2={yScale(0.5)}
-            className="chart-ref-line"
-          />
+          {/* 50% reference line (only for win rate modes) */}
+          {view !== 'elo' && (
+            <line
+              x1={PAD.left} y1={yScale(0.5)}
+              x2={CHART_W - PAD.right} y2={yScale(0.5)}
+              className="chart-ref-line"
+            />
+          )}
 
           {/* Player lines */}
           {visibleTrends.map((trend) => {
@@ -185,7 +246,7 @@ export default function Trends({ data }: { data: MatchupData }) {
                 {trend.points.length > 0 && (() => {
                   const last = trend.points[trend.points.length - 1];
                   const x = xScale(last.matchIndex);
-                  const y = yScale(last.winRate);
+                  const y = yScale(getValue(last));
                   return (
                     <>
                       <circle cx={x} cy={y} r={3.5} fill={color} />
@@ -216,24 +277,36 @@ export default function Trends({ data }: { data: MatchupData }) {
                   <th>#</th>
                   <th>Opponent</th>
                   <th>Result</th>
-                  <th>Win Rate After</th>
-                  <th>Record</th>
+                  <th>{view === 'elo' ? 'Δ Elo' : 'Win Rate After'}</th>
+                  <th>{view === 'elo' ? 'Elo' : 'Record'}</th>
                 </tr>
               </thead>
               <tbody>
-                {focusedTrend.points.map((p, i) => (
-                  <tr key={i}>
-                    <td>{p.matchIndex}</td>
-                    <td>{p.opponent}</td>
-                    <td>
-                      <span className={p.won ? 'streak-win' : 'streak-loss'}>
-                        {p.won ? 'Win' : 'Loss'}
-                      </span>
-                    </td>
-                    <td>{(p.winRate * 100).toFixed(1)}%</td>
-                    <td>{p.wins}W–{p.total - p.wins}L</td>
-                  </tr>
-                ))}
+                {focusedTrend.points.map((p, i) => {
+                  const prevElo = i > 0 ? focusedTrend.points[i - 1].elo : 1200;
+                  const delta = p.elo - prevElo;
+                  return (
+                    <tr key={i}>
+                      <td>{p.matchIndex}</td>
+                      <td>{p.opponent}</td>
+                      <td>
+                        <span className={p.won ? 'streak-win' : 'streak-loss'}>
+                          {p.won ? 'Win' : 'Loss'}
+                        </span>
+                      </td>
+                      <td>
+                        {view === 'elo'
+                          ? <span className={delta >= 0 ? 'streak-win' : 'streak-loss'}>
+                              {delta >= 0 ? '+' : ''}{delta}
+                            </span>
+                          : `${(getValue(p) * 100).toFixed(1)}%`}
+                      </td>
+                      <td>
+                        {view === 'elo' ? p.elo : `${p.wins}W–${p.total - p.wins}L`}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -245,6 +318,10 @@ export default function Trends({ data }: { data: MatchupData }) {
         {trends.map((t) => {
           const color = playerColor(t.player);
           const isHidden = hidden.has(t.player);
+          const last = t.points[t.points.length - 1];
+          const metric = view === 'elo'
+            ? `${last.elo}`
+            : `${last.wins}W–${last.total - last.wins}L`;
           return (
             <button
               key={t.player}
@@ -253,9 +330,7 @@ export default function Trends({ data }: { data: MatchupData }) {
             >
               <span className="chart-legend-dot" style={{ background: color }} />
               {t.player}
-              <span className="chart-legend-meta">
-                {' '}({t.points[t.points.length - 1].wins}W–{t.points[t.points.length - 1].total - t.points[t.points.length - 1].wins}L)
-              </span>
+              <span className="chart-legend-meta">{` (${metric})`}</span>
             </button>
           );
         })}

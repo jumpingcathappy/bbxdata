@@ -199,9 +199,12 @@ export function computeHeadToHead(data: MatchupData): HeadToHeadRecord[] {
 export interface TrendPoint {
   matchIndex: number;     // 1-based sequential index across the player's matches
   winRate: number;        // cumulative wins / total matches so far (0–1)
+  rollingWinRate: number;  // rolling window win rate (last N matches, 0–1)
+  elo: number;            // Elo rating after this match
   wins: number;
   total: number;
   opponent: string;
+  opponentEloBefore: number; // opponent's Elo before this match (for context)
   won: boolean;
 }
 
@@ -210,14 +213,11 @@ export interface PlayerTrend {
   points: TrendPoint[];
 }
 
-export function computeWinRateTrend(data: MatchupData): PlayerTrend[] {
-  const map = new Map<string, TrendPoint[]>();
-  const ensure = (name: string): TrendPoint[] => {
-    let arr = map.get(name);
-    if (!arr) { arr = []; map.set(name, arr); }
-    return arr;
-  };
+const ROLLING_WINDOW = 10;
+const ELO_START = 1200;
+const ELO_K = 32;
 
+export function computeWinRateTrend(data: MatchupData): PlayerTrend[] {
   // Collect all matches with bracket date for sorting
   interface Entry { player: string; opponent: string; won: boolean; bracketCreatedAt: string; round: number; }
   const entries: Entry[] = [];
@@ -237,25 +237,62 @@ export function computeWinRateTrend(data: MatchupData): PlayerTrend[] {
     return a.round - b.round;
   });
 
-  // Build cumulative trend per player
-  const stats = new Map<string, { wins: number; total: number }>();
+  // Per-player state
+  const cumulative = new Map<string, { wins: number; total: number }>();
+  const rolling = new Map<string, boolean[]>(); // recent results (true=win)
+  const eloMap = new Map<string, number>();      // current Elo per player
+  const trends = new Map<string, TrendPoint[]>();
+
+  const ensure = (name: string): TrendPoint[] => {
+    let arr = trends.get(name);
+    if (!arr) { arr = []; trends.set(name, arr); }
+    return arr;
+  };
+
   for (const e of entries) {
-    const s = stats.get(e.player) ?? { wins: 0, total: 0 };
-    s.total += 1;
-    if (e.won) s.wins += 1;
-    stats.set(e.player, s);
+    // Cumulative
+    const c = cumulative.get(e.player) ?? { wins: 0, total: 0 };
+    c.total += 1;
+    if (e.won) c.wins += 1;
+    cumulative.set(e.player, c);
+
+    // Rolling window
+    const r = rolling.get(e.player) ?? [];
+    r.push(e.won);
+    if (r.length > ROLLING_WINDOW) r.shift();
+    rolling.set(e.player, r);
+    const rollingWins = r.filter(Boolean).length;
+    const rollingRate = rollingWins / r.length;
+
+    // Elo — both players must have an Elo before we can compute the update
+    const playerElo = eloMap.get(e.player) ?? ELO_START;
+    const oppElo = eloMap.get(e.opponent) ?? ELO_START;
+
+    // Expected score
+    const expected = 1 / (1 + Math.pow(10, (oppElo - playerElo) / 400));
+    const actual = e.won ? 1 : 0;
+    const newElo = playerElo + ELO_K * (actual - expected);
+
+    // Store opponent's Elo before this match for context
+    const oppEloBefore = oppElo;
+
+    eloMap.set(e.player, newElo);
+
     const arr = ensure(e.player);
     arr.push({
       matchIndex: arr.length + 1,
-      winRate: s.wins / s.total,
-      wins: s.wins,
-      total: s.total,
+      winRate: c.wins / c.total,
+      rollingWinRate: rollingRate,
+      elo: Math.round(newElo),
+      wins: c.wins,
+      total: c.total,
       opponent: e.opponent,
+      opponentEloBefore: Math.round(oppEloBefore),
       won: e.won,
     });
   }
 
-  const result = Array.from(map.entries()).map(([player, points]) => ({ player, points }));
+  const result = Array.from(trends.entries()).map(([player, points]) => ({ player, points }));
   result.sort((a, b) => b.points.length - a.points.length);
   return result;
 }

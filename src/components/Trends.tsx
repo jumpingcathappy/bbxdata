@@ -20,6 +20,7 @@ export default function Trends({ data }: { data: MatchupData }) {
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [focus, setFocus] = useState<string>('');
   const [view, setView] = useState<ViewMode>('cumulative');
+  const [showInfo, setShowInfo] = useState(false);
 
   const visibleTrends = useMemo(
     () => trends.filter((t) => !hidden.has(t.player)),
@@ -132,6 +133,44 @@ export default function Trends({ data }: { data: MatchupData }) {
     { id: 'elo', label: 'Elo Rating' },
   ];
 
+  const tooltips: Record<ViewMode, string> = {
+    cumulative: 'Total wins ÷ total matches, updated after every match. Shows overall trajectory but flattens over time.',
+    rolling: 'Win rate over only the last 10 matches. Stays responsive at any match count — great for spotting recent form.',
+    elo: 'Self-correcting rating (start 1200, K=32). Beating stronger opponents = bigger gains. Every match always causes a visible shift.',
+  };
+
+  const infoContent: Record<ViewMode, React.ReactNode> = {
+    cumulative: (
+      <div className="info-formula">
+        <p><strong>Cumulative Win Rate</strong> after match <em>N</em>:</p>
+        <pre className="formula-code">winRate = totalWins / totalMatches</pre>
+        <p>Simple: divide all-time wins by all-time matches. The more matches you have, the less a single result moves the line.</p>
+      </div>
+    ),
+    rolling: (
+      <div className="info-formula">
+        <p><strong>Rolling Win Rate</strong> (window = 10):</p>
+        <pre className="formula-code">rollingWinRate = winsInLast10 / min(10, totalMatches)</pre>
+        <p>Only counts the last 10 matches. A player who won 7 of their last 10 shows 70%, regardless of their 50-match history. The line stays bumpy and responsive forever.</p>
+      </div>
+    ),
+    elo: (
+      <div className="info-formula">
+        <p><strong>Elo Rating</strong> — standard Elo system:</p>
+        <pre className="formula-code">Expected score:
+  E = 1 / (1 + 10^((oppRating - myRating) / 400))
+
+Rating update:
+  newRating = oldRating + K × (actual - E)
+
+  K = 32 (sensitivity factor)
+  Starting rating = 1200
+  actual = 1 (win) or 0 (loss)</pre>
+        <p>Key property: beating a higher-rated opponent gives more points than beating a lower-rated one. A +32 swing happens when you beat someone rated ~400 points above you. Every match always changes your rating — it never flattens.</p>
+      </div>
+    ),
+  };
+
   return (
     <section className="section">
       <h2>Win Rate Trends</h2>
@@ -154,6 +193,16 @@ export default function Trends({ data }: { data: MatchupData }) {
               {v.label}
             </button>
           ))}
+          {/* Info icon with tooltip */}
+          <span className="info-icon-wrapper">
+            <span
+              className="info-icon"
+              onClick={() => setShowInfo((s) => !s)}
+              title={tooltips[view]}
+            >
+              ℹ
+            </span>
+          </span>
         </div>
         <div className="filter-row" style={{ gap: 10, marginBottom: 0 }}>
           <label htmlFor="trend-focus">Focus:</label>
@@ -178,6 +227,17 @@ export default function Trends({ data }: { data: MatchupData }) {
           )}
         </div>
       </div>
+
+      {/* Collapsible info panel */}
+      {showInfo && (
+        <div className="info-panel">
+          <div className="info-panel-header">
+            <span>How is {view === 'elo' ? 'Elo Rating' : view === 'rolling' ? 'Rolling Win Rate' : 'Cumulative Win Rate'} calculated?</span>
+            <button className="btn-ghost" onClick={() => setShowInfo(false)}>✕</button>
+          </div>
+          {infoContent[view]}
+        </div>
+      )}
 
       <div className="chart-container">
         <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} className="chart-svg">

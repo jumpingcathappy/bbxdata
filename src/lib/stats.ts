@@ -297,6 +297,66 @@ export function computeWinRateTrend(data: MatchupData): PlayerTrend[] {
   return result;
 }
 
+// ── Elo Ratings ──────────────────────────────────────────────────
+
+export interface EloRating {
+  player: string;
+  elo: number;
+}
+
+/**
+ * Compute each player's final Elo rating by replaying all matches
+ * chronologically. Uses the same params as the Trends chart:
+ * start=1200, K=32.
+ */
+export function computeEloRatings(data: MatchupData): EloRating[] {
+  const eloMap = new Map<string, number>();
+
+  // Collect all decided matches with bracket dates for chronological sort
+  interface Entry { playerA: string; playerB: string; winner: string; bracketCreatedAt: string; round: number; }
+  const entries: Entry[] = [];
+  for (const bracket of data.brackets) {
+    for (const match of bracket.matches) {
+      if (match.winner === null) continue;
+      entries.push({
+        playerA: match.playerA,
+        playerB: match.playerB,
+        winner: match.winner,
+        bracketCreatedAt: bracket.createdAt,
+        round: match.round,
+      });
+    }
+  }
+  entries.sort((a, b) => {
+    const t = a.bracketCreatedAt.localeCompare(b.bracketCreatedAt);
+    if (t !== 0) return t;
+    return a.round - b.round;
+  });
+
+  // Replay each match to compute final Elo
+  for (const e of entries) {
+    const aElo = eloMap.get(e.playerA) ?? ELO_START;
+    const bElo = eloMap.get(e.playerB) ?? ELO_START;
+
+    const expectedA = 1 / (1 + Math.pow(10, (bElo - aElo) / 400));
+    const expectedB = 1 / (1 + Math.pow(10, (aElo - bElo) / 400));
+
+    const actualA = e.winner === e.playerA ? 1 : 0;
+    const actualB = e.winner === e.playerB ? 1 : 0;
+
+    eloMap.set(e.playerA, aElo + ELO_K * (actualA - expectedA));
+    eloMap.set(e.playerB, bElo + ELO_K * (actualB - expectedB));
+  }
+
+  const ratings: EloRating[] = [];
+  for (const [player, elo] of eloMap.entries()) {
+    ratings.push({ player, elo: Math.round(elo) });
+  }
+  // Sort by Elo descending
+  ratings.sort((a, b) => b.elo - a.elo);
+  return ratings;
+}
+
 // ── Leaderboard ──────────────────────────────────────────────────
 
 export interface LeaderboardEntry {

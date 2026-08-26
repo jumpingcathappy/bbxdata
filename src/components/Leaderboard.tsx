@@ -1,5 +1,5 @@
 import type { MatchupData } from '../types';
-import { computeLeaderboard } from '../lib/stats';
+import { computeLeaderboard, computeEloRatings } from '../lib/stats';
 import SortableTable from './SortableTable';
 
 function streakCell(type: 'win' | 'loss' | 'none', count: number): string {
@@ -10,6 +10,14 @@ function streakCell(type: 'win' | 'loss' | 'none', count: number): string {
 
 export default function Leaderboard({ data }: { data: MatchupData }) {
   const entries = computeLeaderboard(data);
+  const eloRatings = computeEloRatings(data);
+  const eloMap = new Map(eloRatings.map((e) => [e.player, e.elo]));
+
+  // Merge Elo into leaderboard entries
+  const merged = entries.map((e) => ({
+    ...e,
+    elo: eloMap.get(e.player) ?? 1200,
+  }));
 
   return (
     <section className="section">
@@ -20,10 +28,16 @@ export default function Leaderboard({ data }: { data: MatchupData }) {
             {
               key: 'rank',
               label: '#',
-              sortValue: (e) => e.wins,
+              sortValue: (e) => e.elo,
               render: (_e, i) => String(i + 1),
             },
             { key: 'player', label: 'Player' },
+            {
+              key: 'elo',
+              label: 'Elo',
+              sortValue: (e) => e.elo,
+              render: (e) => String(e.elo),
+            },
             { key: 'wins', label: 'Wins' },
             { key: 'losses', label: 'Losses' },
             { key: 'total', label: 'Total' },
@@ -50,9 +64,9 @@ export default function Leaderboard({ data }: { data: MatchupData }) {
               render: (e) => e.longestWinStreak > 0 ? `${e.longestWinStreak}W` : '—',
             },
           ]}
-          rows={entries}
+          rows={merged}
           rowKey={(e) => e.player}
-          defaultSortKey="wins"
+          defaultSortKey="elo"
           defaultSortDir="desc"
           emptyMessage="No players yet."
         />

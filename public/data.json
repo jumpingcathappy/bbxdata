@@ -1,6 +1,1927 @@
 {
-  "exportedAt": "2026-09-17T06:57:06.485Z",
+  "exportedAt": "2026-10-29T08:36:10.803Z",
   "brackets": [
+    {
+      "id": "6ad9bbbb25da830007e47300",
+      "name": "adhoc 最強 20261023",
+      "type": "single_elimination",
+      "createdAt": "2026-10-22T07:31:07.290Z",
+      "matches": [
+        {
+          "id": "6ad9bbbb25da830007e47300-r1-BNb8u3rOQuVcr8fY76Ax_",
+          "round": 1,
+          "playerA": "Alex",
+          "playerB": "Angus",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r1-X-qhCkzqYps3VGDNA9fMd",
+          "round": 1,
+          "playerA": "Tim",
+          "playerB": "Yin",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r1-0gDjT-NApKu7OJPpAbumd",
+          "round": 1,
+          "playerA": "Alan Sir",
+          "playerB": "Rockman",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r1-nezQFks2SZPgUkVQJJyeA",
+          "round": 1,
+          "playerA": "Alvin",
+          "playerB": "Jojo",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r1-dBJGwdrdwrd-XAUVvqzpS",
+          "round": 1,
+          "playerA": "Keith",
+          "playerB": "Issac",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r2-_hy6MKjT0Udj2pp0VTrnY",
+          "round": 2,
+          "playerA": "Ben",
+          "playerB": "Angus",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r2-BNb8u3rOQuVcr8fY76Ax_",
+          "round": 2,
+          "playerA": "Alex",
+          "playerB": "Alan Sir",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r2-dBJGwdrdwrd-XAUVvqzpS",
+          "round": 2,
+          "playerA": "Keith",
+          "playerB": "Rockman",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r2-fhEp8fiiP5nm2dWemQbYy",
+          "round": 2,
+          "playerA": "Jojo",
+          "playerB": "Yin",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r2-nezQFks2SZPgUkVQJJyeA",
+          "round": 2,
+          "playerA": "Alvin",
+          "playerB": "Issac",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r3-lPEK7tXwf9bKo32t_UXgW",
+          "round": 3,
+          "playerA": "Angus",
+          "playerB": "Alan Sir",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r3-_hy6MKjT0Udj2pp0VTrnY",
+          "round": 3,
+          "playerA": "Ben",
+          "playerB": "Tim",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r3-aXYTloI6tHHN-ZXCuYppb",
+          "round": 3,
+          "playerA": "Yin",
+          "playerB": "Issac",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r4-_hy6MKjT0Udj2pp0VTrnY",
+          "round": 4,
+          "playerA": "Ben",
+          "playerB": "Alan Sir",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r3-dBJGwdrdwrd-XAUVvqzpS",
+          "round": 3,
+          "playerA": "Keith",
+          "playerB": "Alex",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r4-X-qhCkzqYps3VGDNA9fMd",
+          "round": 4,
+          "playerA": "Tim",
+          "playerB": "Jojo",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r3-nezQFks2SZPgUkVQJJyeA",
+          "round": 3,
+          "playerA": "Alvin",
+          "playerB": "Rockman",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r4-BNb8u3rOQuVcr8fY76Ax_",
+          "round": 4,
+          "playerA": "Alex",
+          "playerB": "Alvin",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r4-dBJGwdrdwrd-XAUVvqzpS",
+          "round": 4,
+          "playerA": "Keith",
+          "playerB": "Angus",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r5-fhEp8fiiP5nm2dWemQbYy",
+          "round": 5,
+          "playerA": "Jojo",
+          "playerB": "Ben",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r4-aXYTloI6tHHN-ZXCuYppb",
+          "round": 4,
+          "playerA": "Yin",
+          "playerB": "Rockman",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r5-Z9CoEtCbhsDU5whI7ujbJ",
+          "round": 5,
+          "playerA": "Issac",
+          "playerB": "Tim",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r5-dBJGwdrdwrd-XAUVvqzpS",
+          "round": 5,
+          "playerA": "Keith",
+          "playerB": "Alan Sir",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r5-nezQFks2SZPgUkVQJJyeA",
+          "round": 5,
+          "playerA": "Alvin",
+          "playerB": "Angus",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r5-BNb8u3rOQuVcr8fY76Ax_",
+          "round": 5,
+          "playerA": "Alex",
+          "playerB": "Yin",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r6-fhEp8fiiP5nm2dWemQbYy",
+          "round": 6,
+          "playerA": "Jojo",
+          "playerB": "Issac",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r6-dBJGwdrdwrd-XAUVvqzpS",
+          "round": 6,
+          "playerA": "Keith",
+          "playerB": "Ben",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r6-1bgztPiLDTYtQkXLeQjFw",
+          "round": 6,
+          "playerA": "Rockman",
+          "playerB": "Tim",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r6-nezQFks2SZPgUkVQJJyeA",
+          "round": 6,
+          "playerA": "Alvin",
+          "playerB": "Alan Sir",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r6-lPEK7tXwf9bKo32t_UXgW",
+          "round": 6,
+          "playerA": "Angus",
+          "playerB": "Yin",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r7-Z9CoEtCbhsDU5whI7ujbJ",
+          "round": 7,
+          "playerA": "Issac",
+          "playerB": "Ben",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r7-1bgztPiLDTYtQkXLeQjFw",
+          "round": 7,
+          "playerA": "Rockman",
+          "playerB": "Jojo",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r7-aXYTloI6tHHN-ZXCuYppb",
+          "round": 7,
+          "playerA": "Yin",
+          "playerB": "Alan Sir",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r7-dBJGwdrdwrd-XAUVvqzpS",
+          "round": 7,
+          "playerA": "Keith",
+          "playerB": "Alvin",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6ad9bbbb25da830007e47300-r7-BNb8u3rOQuVcr8fY76Ax_",
+          "round": 7,
+          "playerA": "Alex",
+          "playerB": "Tim",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 0
+        }
+      ]
+    },
+    {
+      "id": "6ad9bbae25da830007e472ff",
+      "name": "最強",
+      "type": "single_elimination",
+      "createdAt": "2026-10-22T07:30:54.377Z",
+      "matches": []
+    },
+    {
+      "id": "6ad04f29c9aaf00007844173",
+      "name": "Adhoc 最強 20261015",
+      "type": "single_elimination",
+      "createdAt": "2026-10-15T03:57:29.012Z",
+      "matches": [
+        {
+          "id": "6ad04f29c9aaf00007844173-r3-DrNECNJOIh2DxPhE8anXL",
+          "round": 3,
+          "playerA": "Alan Sir",
+          "playerB": "Keith",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r3-f44vD5-H4jWK7UnLVHg69",
+          "round": 3,
+          "playerA": "Yin",
+          "playerB": "Ben",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r3-rTvDnU6YIAmfO_2L6kDAd",
+          "round": 3,
+          "playerA": "Rockman",
+          "playerB": "Issac",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r3-L_EzX5xdx4_LPHp7j-XPg",
+          "round": 3,
+          "playerA": "Alvin",
+          "playerB": "Jojo",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r4-0_y-AnGQUETOHaKD-PDyZ",
+          "round": 4,
+          "playerA": "Jojo",
+          "playerB": "Alan Sir",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r4-f44vD5-H4jWK7UnLVHg69",
+          "round": 4,
+          "playerA": "Yin",
+          "playerB": "Keith",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r4-rTvDnU6YIAmfO_2L6kDAd",
+          "round": 4,
+          "playerA": "Rockman",
+          "playerB": "Ben",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r4-L_EzX5xdx4_LPHp7j-XPg",
+          "round": 4,
+          "playerA": "Alvin",
+          "playerB": "Issac",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r5-_34KnuTe0Uc1bJddYftzk",
+          "round": 5,
+          "playerA": "Keith",
+          "playerB": "Jojo",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r5-Om4b8y1m1NnW4-g77MFpL",
+          "round": 5,
+          "playerA": "Issac",
+          "playerB": "Alan Sir",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r5-rTvDnU6YIAmfO_2L6kDAd",
+          "round": 5,
+          "playerA": "Rockman",
+          "playerB": "Yin",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r6-Om4b8y1m1NnW4-g77MFpL",
+          "round": 6,
+          "playerA": "Issac",
+          "playerB": "Jojo",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r6-rTvDnU6YIAmfO_2L6kDAd",
+          "round": 6,
+          "playerA": "Rockman",
+          "playerB": "Keith",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r6-L_EzX5xdx4_LPHp7j-XPg",
+          "round": 6,
+          "playerA": "Alvin",
+          "playerB": "Yin",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r6-IW5ZD_uHiAjeaXZvfDRbn",
+          "round": 6,
+          "playerA": "Ben",
+          "playerB": "Alan Sir",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r7-Om4b8y1m1NnW4-g77MFpL",
+          "round": 7,
+          "playerA": "Issac",
+          "playerB": "Keith",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r7-DrNECNJOIh2DxPhE8anXL",
+          "round": 7,
+          "playerA": "Alan Sir",
+          "playerB": "Yin",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r7-0_y-AnGQUETOHaKD-PDyZ",
+          "round": 7,
+          "playerA": "Jojo",
+          "playerB": "Ben",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r5-L_EzX5xdx4_LPHp7j-XPg",
+          "round": 5,
+          "playerA": "Alvin",
+          "playerB": "Ben",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r7-L_EzX5xdx4_LPHp7j-XPg",
+          "round": 7,
+          "playerA": "Alvin",
+          "playerB": "Rockman",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r1-_34KnuTe0Uc1bJddYftzk",
+          "round": 1,
+          "playerA": "Keith",
+          "playerB": "Alvin",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r1-IW5ZD_uHiAjeaXZvfDRbn",
+          "round": 1,
+          "playerA": "Ben",
+          "playerB": "Issac",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r1-DrNECNJOIh2DxPhE8anXL",
+          "round": 1,
+          "playerA": "Alan Sir",
+          "playerB": "Rockman",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r1-0_y-AnGQUETOHaKD-PDyZ",
+          "round": 1,
+          "playerA": "Jojo",
+          "playerB": "Yin",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r2-_34KnuTe0Uc1bJddYftzk",
+          "round": 2,
+          "playerA": "Keith",
+          "playerB": "Ben",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r2-DrNECNJOIh2DxPhE8anXL",
+          "round": 2,
+          "playerA": "Alan Sir",
+          "playerB": "Alvin",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r2-Om4b8y1m1NnW4-g77MFpL",
+          "round": 2,
+          "playerA": "Issac",
+          "playerB": "Yin",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6ad04f29c9aaf00007844173-r2-rTvDnU6YIAmfO_2L6kDAd",
+          "round": 2,
+          "playerA": "Rockman",
+          "playerB": "Jojo",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 3
+        }
+      ]
+    },
+    {
+      "id": "6ac36b6c806dc60006fc9678",
+      "name": "CCeP x DWII 第十屆爆旋陀螺大賽 - 最強最長盃",
+      "type": "single_elimination",
+      "createdAt": "2026-10-05T09:18:36.668Z",
+      "matches": [
+        {
+          "id": "6ac36b6c806dc60006fc9678-r1-Wznt3UoC9QvurcDpqkt08",
+          "round": 1,
+          "playerA": "Jojo",
+          "playerB": "Parco x Madam",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r1-BZmBChhZvbPSHd3L8S5Of",
+          "round": 1,
+          "playerA": "Alan Sir",
+          "playerB": "Rockman",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r1-S_7ymL3I-lryeef_x8hHI",
+          "round": 1,
+          "playerA": "Keith",
+          "playerB": "Issac",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r1-roiIe1gf1jOCcv-Pfxid9",
+          "round": 1,
+          "playerA": "Yin",
+          "playerB": "Alex",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r2-roiIe1gf1jOCcv-Pfxid9",
+          "round": 2,
+          "playerA": "Yin",
+          "playerB": "Jojo",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r2-iyEu70Puzlike6E33vqGA",
+          "round": 2,
+          "playerA": "Alex",
+          "playerB": "Alvin",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r2-KfA7OqW0WKV6H3sNalwsI",
+          "round": 2,
+          "playerA": "Tim",
+          "playerB": "Issac",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r2-Ngzaj528lR3zEwJTb2h6e",
+          "round": 2,
+          "playerA": "Rockman",
+          "playerB": "Keith",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r3-Ngzaj528lR3zEwJTb2h6e",
+          "round": 3,
+          "playerA": "Rockman",
+          "playerB": "Tim",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r3-2SyVL2L7tNhvzSi8QI4Gl",
+          "round": 3,
+          "playerA": "Alvin",
+          "playerB": "Jojo",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r4-6rNJjPcjmgcbsSgcs-qBk",
+          "round": 4,
+          "playerA": "Issac",
+          "playerB": "Ben",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r3-BZmBChhZvbPSHd3L8S5Of",
+          "round": 3,
+          "playerA": "Alan Sir",
+          "playerB": "Alex",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r4-UC5TRbINo1u7hvhwS_A1f",
+          "round": 4,
+          "playerA": "Parco x Madam",
+          "playerB": "Yin",
+          "winner": "Parco x Madam",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r5-roiIe1gf1jOCcv-Pfxid9",
+          "round": 5,
+          "playerA": "Yin",
+          "playerB": "Ben",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r4-BZmBChhZvbPSHd3L8S5Of",
+          "round": 4,
+          "playerA": "Alan Sir",
+          "playerB": "Jojo",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r5-Ngzaj528lR3zEwJTb2h6e",
+          "round": 5,
+          "playerA": "Rockman",
+          "playerB": "Issac",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r5-2SyVL2L7tNhvzSi8QI4Gl",
+          "round": 5,
+          "playerA": "Alvin",
+          "playerB": "Parco x Madam",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r4-iyEu70Puzlike6E33vqGA",
+          "round": 4,
+          "playerA": "Alex",
+          "playerB": "Keith",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r6-Ngzaj528lR3zEwJTb2h6e",
+          "round": 6,
+          "playerA": "Rockman",
+          "playerB": "Ben",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r5-KfA7OqW0WKV6H3sNalwsI",
+          "round": 5,
+          "playerA": "Tim",
+          "playerB": "Alex",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r5-Wznt3UoC9QvurcDpqkt08",
+          "round": 5,
+          "playerA": "Jojo",
+          "playerB": "Keith",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r6-roiIe1gf1jOCcv-Pfxid9",
+          "round": 6,
+          "playerA": "Yin",
+          "playerB": "Alvin",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r6-BZmBChhZvbPSHd3L8S5Of",
+          "round": 6,
+          "playerA": "Alan Sir",
+          "playerB": "Parco x Madam",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r6-Wznt3UoC9QvurcDpqkt08",
+          "round": 6,
+          "playerA": "Jojo",
+          "playerB": "Tim",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r7-pX8sGU2NC-BZdEX91DPj_",
+          "round": 7,
+          "playerA": "Ben",
+          "playerB": "Alvin",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r7-iyEu70Puzlike6E33vqGA",
+          "round": 7,
+          "playerA": "Alex",
+          "playerB": "Issac",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r7-roiIe1gf1jOCcv-Pfxid9",
+          "round": 7,
+          "playerA": "Yin",
+          "playerB": "Alan Sir",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r7-UC5TRbINo1u7hvhwS_A1f",
+          "round": 7,
+          "playerA": "Parco x Madam",
+          "playerB": "Keith",
+          "winner": "Parco x Madam",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r8-BZmBChhZvbPSHd3L8S5Of",
+          "round": 8,
+          "playerA": "Alan Sir",
+          "playerB": "Alvin",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r8-Ngzaj528lR3zEwJTb2h6e",
+          "round": 8,
+          "playerA": "Rockman",
+          "playerB": "Alex",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r8-S_7ymL3I-lryeef_x8hHI",
+          "round": 8,
+          "playerA": "Keith",
+          "playerB": "Yin",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r8-Wznt3UoC9QvurcDpqkt08",
+          "round": 8,
+          "playerA": "Jojo",
+          "playerB": "Issac",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r8-KfA7OqW0WKV6H3sNalwsI",
+          "round": 8,
+          "playerA": "Tim",
+          "playerB": "Parco x Madam",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r9-KfA7OqW0WKV6H3sNalwsI",
+          "round": 9,
+          "playerA": "Tim",
+          "playerB": "Yin",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r9-BZmBChhZvbPSHd3L8S5Of",
+          "round": 9,
+          "playerA": "Alan Sir",
+          "playerB": "Ben",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r5-KVenSBh4Xcg0A1XccS3Jc",
+          "round": 5,
+          "playerA": "Tiffany",
+          "playerB": "Angus",
+          "winner": "Tiffany",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r4-Ngzaj528lR3zEwJTb2h6e",
+          "round": 4,
+          "playerA": "Rockman",
+          "playerB": "Tiffany",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r1-KfA7OqW0WKV6H3sNalwsI",
+          "round": 1,
+          "playerA": "Tim",
+          "playerB": "Tiffany",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r1-2SyVL2L7tNhvzSi8QI4Gl",
+          "round": 1,
+          "playerA": "Alvin",
+          "playerB": "Angus",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r2-BZmBChhZvbPSHd3L8S5Of",
+          "round": 2,
+          "playerA": "Alan Sir",
+          "playerB": "Angus",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r3-6rNJjPcjmgcbsSgcs-qBk",
+          "round": 3,
+          "playerA": "Issac",
+          "playerB": "Tiffany",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r3-OYOA14VW70FZwuGfH-8-B",
+          "round": 3,
+          "playerA": "Angus",
+          "playerB": "Keith",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r4-KfA7OqW0WKV6H3sNalwsI",
+          "round": 4,
+          "playerA": "Tim",
+          "playerB": "Angus",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r6-iyEu70Puzlike6E33vqGA",
+          "round": 6,
+          "playerA": "Alex",
+          "playerB": "Tiffany",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r3-pX8sGU2NC-BZdEX91DPj_",
+          "round": 3,
+          "playerA": "Ben",
+          "playerB": "Parco x Madam",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r6-OYOA14VW70FZwuGfH-8-B",
+          "round": 6,
+          "playerA": "Angus",
+          "playerB": "Issac",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r7-Ngzaj528lR3zEwJTb2h6e",
+          "round": 7,
+          "playerA": "Rockman",
+          "playerB": "Angus",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r2-KVenSBh4Xcg0A1XccS3Jc",
+          "round": 2,
+          "playerA": "Tiffany",
+          "playerB": "Ben",
+          "winner": "Tiffany",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r9-OYOA14VW70FZwuGfH-8-B",
+          "round": 9,
+          "playerA": "Angus",
+          "playerB": "Alex",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r7-KVenSBh4Xcg0A1XccS3Jc",
+          "round": 7,
+          "playerA": "Tiffany",
+          "playerB": "Jojo",
+          "winner": "Tiffany",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r8-OYOA14VW70FZwuGfH-8-B",
+          "round": 8,
+          "playerA": "Angus",
+          "playerB": "Ben",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r10-Wznt3UoC9QvurcDpqkt08",
+          "round": 10,
+          "playerA": "Jojo",
+          "playerB": "Angus",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r9-UC5TRbINo1u7hvhwS_A1f",
+          "round": 9,
+          "playerA": "Parco x Madam",
+          "playerB": "Tiffany",
+          "winner": "Parco x Madam",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r13-OYOA14VW70FZwuGfH-8-B",
+          "round": 13,
+          "playerA": "Angus",
+          "playerB": "Yin",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r10-iyEu70Puzlike6E33vqGA",
+          "round": 10,
+          "playerA": "Alex",
+          "playerB": "Ben",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r11-6rNJjPcjmgcbsSgcs-qBk",
+          "round": 11,
+          "playerA": "Issac",
+          "playerB": "Yin",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r9-2SyVL2L7tNhvzSi8QI4Gl",
+          "round": 9,
+          "playerA": "Alvin",
+          "playerB": "Keith",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r9-Ngzaj528lR3zEwJTb2h6e",
+          "round": 9,
+          "playerA": "Rockman",
+          "playerB": "Jojo",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r10-BZmBChhZvbPSHd3L8S5Of",
+          "round": 10,
+          "playerA": "Alan Sir",
+          "playerB": "Keith",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r10-KfA7OqW0WKV6H3sNalwsI",
+          "round": 10,
+          "playerA": "Tim",
+          "playerB": "Alvin",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r11-S_7ymL3I-lryeef_x8hHI",
+          "round": 11,
+          "playerA": "Keith",
+          "playerB": "Ben",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r10-6rNJjPcjmgcbsSgcs-qBk",
+          "round": 10,
+          "playerA": "Issac",
+          "playerB": "Parco x Madam",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r11-iyEu70Puzlike6E33vqGA",
+          "round": 11,
+          "playerA": "Alex",
+          "playerB": "Jojo",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r11-BZmBChhZvbPSHd3L8S5Of",
+          "round": 11,
+          "playerA": "Alan Sir",
+          "playerB": "Tim",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r10-roiIe1gf1jOCcv-Pfxid9",
+          "round": 10,
+          "playerA": "Yin",
+          "playerB": "Tiffany",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r11-UC5TRbINo1u7hvhwS_A1f",
+          "round": 11,
+          "playerA": "Parco x Madam",
+          "playerB": "Rockman",
+          "winner": "Parco x Madam",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r11-KVenSBh4Xcg0A1XccS3Jc",
+          "round": 11,
+          "playerA": "Tiffany",
+          "playerB": "Alvin",
+          "winner": "Tiffany",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r12-pX8sGU2NC-BZdEX91DPj_",
+          "round": 12,
+          "playerA": "Ben",
+          "playerB": "Jojo",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r12-OYOA14VW70FZwuGfH-8-B",
+          "round": 12,
+          "playerA": "Angus",
+          "playerB": "Parco x Madam",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r13-pX8sGU2NC-BZdEX91DPj_",
+          "round": 13,
+          "playerA": "Ben",
+          "playerB": "Tim",
+          "winner": "Ben",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r13-iyEu70Puzlike6E33vqGA",
+          "round": 13,
+          "playerA": "Alex",
+          "playerB": "Parco x Madam",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r12-BZmBChhZvbPSHd3L8S5Of",
+          "round": 12,
+          "playerA": "Alan Sir",
+          "playerB": "Tiffany",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r12-roiIe1gf1jOCcv-Pfxid9",
+          "round": 12,
+          "playerA": "Yin",
+          "playerB": "Rockman",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r13-BZmBChhZvbPSHd3L8S5Of",
+          "round": 13,
+          "playerA": "Alan Sir",
+          "playerB": "Issac",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r12-6rNJjPcjmgcbsSgcs-qBk",
+          "round": 12,
+          "playerA": "Issac",
+          "playerB": "Alvin",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r13-Ngzaj528lR3zEwJTb2h6e",
+          "round": 13,
+          "playerA": "Rockman",
+          "playerB": "Alvin",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r13-S_7ymL3I-lryeef_x8hHI",
+          "round": 13,
+          "playerA": "Keith",
+          "playerB": "Tiffany",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ac36b6c806dc60006fc9678-r12-KfA7OqW0WKV6H3sNalwsI",
+          "round": 12,
+          "playerA": "Tim",
+          "playerB": "Keith",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 2
+        }
+      ]
+    },
+    {
+      "id": "6ac36b4d806dc60006fc9674",
+      "name": "CCeP x DWII 第十六屆爆旋陀螺大賽 - 最強盃",
+      "type": "single_elimination",
+      "createdAt": "2026-10-05T09:18:05.192Z",
+      "matches": []
+    },
+    {
+      "id": "6abb6c302c88c0000722f8b0",
+      "name": "芟",
+      "type": "single_elimination",
+      "createdAt": "2026-09-29T07:43:44.682Z",
+      "matches": []
+    },
+    {
+      "id": "6abb4555299bb900075f4a7d",
+      "name": "CCeP x DWII 第十五屆爆旋陀螺大賽 - DIY CX 鱷魚盃 - Knockout",
+      "type": "single_elimination",
+      "createdAt": "2026-09-29T04:57:57.878Z",
+      "matches": [
+        {
+          "id": "6abb4555299bb900075f4a7d-r1-vk5_3Ln8TWOzxFX94dmMV",
+          "round": 1,
+          "playerA": "Alan Sir",
+          "playerB": "Alvin",
+          "winner": "Alan Sir",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6abb4555299bb900075f4a7d-r1-a0KS8dfkdcW8huQBvMVau",
+          "round": 1,
+          "playerA": "Alex",
+          "playerB": "Keith",
+          "winner": "Alex",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6abb4555299bb900075f4a7d-r2-a0KS8dfkdcW8huQBvMVau",
+          "round": 2,
+          "playerA": "Alex",
+          "playerB": "Alan Sir",
+          "winner": "Alex",
+          "scoreA": 1,
+          "scoreB": 0
+        }
+      ]
+    },
+    {
+      "id": "6abb1816299bb900075f45fb",
+      "name": "CCeP x DWII 第十五屆爆旋陀螺大賽 - DIY CX 鱷魚盃",
+      "type": "single_elimination",
+      "createdAt": "2026-09-29T01:44:54.928Z",
+      "matches": [
+        {
+          "id": "6abb1816299bb900075f45fb-r1-sy-SBvbWtKxtYeG6pzZSp",
+          "round": 1,
+          "playerA": "Tim",
+          "playerB": "Jojo",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r1-VYOe_2f7Yn_Cb3Njn8UBy",
+          "round": 1,
+          "playerA": "Yin",
+          "playerB": "Issac",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r1-n824NY_8p_yRuDUMjO08m",
+          "round": 1,
+          "playerA": "Tiffany",
+          "playerB": "Rockman",
+          "winner": "Tiffany",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r1-wfUONibvSfSOoQ99nqZf6",
+          "round": 1,
+          "playerA": "Alex",
+          "playerB": "Alan Sir",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r1-2DyNJ3qr0zEQfo6uwygJq",
+          "round": 1,
+          "playerA": "Keith",
+          "playerB": "Alvin",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r1-9AD4ZvwsiO9M-qfkTiBlN",
+          "round": 1,
+          "playerA": "Angus",
+          "playerB": "Kathy",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r2-RNt4_Lv7TkZ0bNcblMwm-",
+          "round": 2,
+          "playerA": "Jojo",
+          "playerB": "Issac",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r2-sy-SBvbWtKxtYeG6pzZSp",
+          "round": 2,
+          "playerA": "Tim",
+          "playerB": "Alex",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r2-mIIj7Tk52yynEZFOqTHkd",
+          "round": 2,
+          "playerA": "Rockman",
+          "playerB": "Alvin",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r2-MkvBrLvW7IACLfhmcRDmz",
+          "round": 2,
+          "playerA": "Alan Sir",
+          "playerB": "Yin",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r3-wfUONibvSfSOoQ99nqZf6",
+          "round": 3,
+          "playerA": "Alex",
+          "playerB": "Jojo",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r2-9AD4ZvwsiO9M-qfkTiBlN",
+          "round": 2,
+          "playerA": "Angus",
+          "playerB": "Tiffany",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r3-MkvBrLvW7IACLfhmcRDmz",
+          "round": 3,
+          "playerA": "Alan Sir",
+          "playerB": "Issac",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r3-VYOe_2f7Yn_Cb3Njn8UBy",
+          "round": 3,
+          "playerA": "Yin",
+          "playerB": "Tim",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r4-MkvBrLvW7IACLfhmcRDmz",
+          "round": 4,
+          "playerA": "Alan Sir",
+          "playerB": "Jojo",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r2-2DyNJ3qr0zEQfo6uwygJq",
+          "round": 2,
+          "playerA": "Keith",
+          "playerB": "Kathy",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r4-wfUONibvSfSOoQ99nqZf6",
+          "round": 4,
+          "playerA": "Alex",
+          "playerB": "Yin",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r3-9AD4ZvwsiO9M-qfkTiBlN",
+          "round": 3,
+          "playerA": "Angus",
+          "playerB": "Rockman",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r4-sy-SBvbWtKxtYeG6pzZSp",
+          "round": 4,
+          "playerA": "Tim",
+          "playerB": "Issac",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r5-RNt4_Lv7TkZ0bNcblMwm-",
+          "round": 5,
+          "playerA": "Jojo",
+          "playerB": "Yin",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r3-LlGMfTzhu5O7b6dJk1OfZ",
+          "round": 3,
+          "playerA": "Alvin",
+          "playerB": "Kathy",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r3-2DyNJ3qr0zEQfo6uwygJq",
+          "round": 3,
+          "playerA": "Keith",
+          "playerB": "Tiffany",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r5-MkvBrLvW7IACLfhmcRDmz",
+          "round": 5,
+          "playerA": "Alan Sir",
+          "playerB": "Tim",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r5-wfUONibvSfSOoQ99nqZf6",
+          "round": 5,
+          "playerA": "Alex",
+          "playerB": "Issac",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 1
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r4-mIIj7Tk52yynEZFOqTHkd",
+          "round": 4,
+          "playerA": "Rockman",
+          "playerB": "Kathy",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r4-2DyNJ3qr0zEQfo6uwygJq",
+          "round": 4,
+          "playerA": "Keith",
+          "playerB": "Angus",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r4-LlGMfTzhu5O7b6dJk1OfZ",
+          "round": 4,
+          "playerA": "Alvin",
+          "playerB": "Tiffany",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r5-2DyNJ3qr0zEQfo6uwygJq",
+          "round": 5,
+          "playerA": "Keith",
+          "playerB": "Rockman",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 2
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r5-n824NY_8p_yRuDUMjO08m",
+          "round": 5,
+          "playerA": "Tiffany",
+          "playerB": "Kathy",
+          "winner": "Tiffany",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6abb1816299bb900075f45fb-r5-LlGMfTzhu5O7b6dJk1OfZ",
+          "round": 5,
+          "playerA": "Alvin",
+          "playerB": "Angus",
+          "winner": "Alvin",
+          "scoreA": 4,
+          "scoreB": 3
+        }
+      ]
+    },
+    {
+      "id": "6ab208dd3d532d0008b5b778",
+      "name": "Adhoc 2 cx",
+      "type": "single_elimination",
+      "createdAt": "2026-09-22T04:49:33.390Z",
+      "matches": [
+        {
+          "id": "6ab208dd3d532d0008b5b778-r1-e0CwvZrJ3tf2MN--ncBJ5",
+          "round": 1,
+          "playerA": "Angus",
+          "playerB": "Jojo",
+          "winner": "Angus",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab208dd3d532d0008b5b778-r2-6FNzYUdCZs48f8p7y9TP-",
+          "round": 2,
+          "playerA": "Rockman",
+          "playerB": "Alex",
+          "winner": "Rockman",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab208dd3d532d0008b5b778-r2-M61OXdd4FR2CiG0cNmzQA",
+          "round": 2,
+          "playerA": "Keith",
+          "playerB": "Issac",
+          "winner": "Keith",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab208dd3d532d0008b5b778-r2-9FyPcEMqFIpxfqo1TUAoB",
+          "round": 2,
+          "playerA": "Tim",
+          "playerB": "Alan Sir",
+          "winner": "Tim",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab208dd3d532d0008b5b778-r3-M61OXdd4FR2CiG0cNmzQA",
+          "round": 3,
+          "playerA": "Keith",
+          "playerB": "Tim",
+          "winner": "Keith",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab208dd3d532d0008b5b778-r2-k-wwoP6Ay532aU2XevrxI",
+          "round": 2,
+          "playerA": "Alvin",
+          "playerB": "Angus",
+          "winner": "Alvin",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab208dd3d532d0008b5b778-r3-k-wwoP6Ay532aU2XevrxI",
+          "round": 3,
+          "playerA": "Alvin",
+          "playerB": "Rockman",
+          "winner": "Alvin",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab208dd3d532d0008b5b778-r4-M61OXdd4FR2CiG0cNmzQA",
+          "round": 4,
+          "playerA": "Keith",
+          "playerB": "Alvin",
+          "winner": "Keith",
+          "scoreA": 1,
+          "scoreB": 0
+        }
+      ]
+    },
+    {
+      "id": "6ab20750eb28f80007b50b4d",
+      "name": "Adhoc CX - Knockout",
+      "type": "single_elimination",
+      "createdAt": "2026-09-22T04:42:56.149Z",
+      "matches": [
+        {
+          "id": "6ab20750eb28f80007b50b4d-r1-pkUsvTtlG3vQo-i1iGt_F",
+          "round": 1,
+          "playerA": "Rockman",
+          "playerB": "Jojo",
+          "winner": "Rockman",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab20750eb28f80007b50b4d-r1-QPi5NIxd_jiN_HG93Y1gT",
+          "round": 1,
+          "playerA": "Keith",
+          "playerB": "Issac",
+          "winner": "Keith",
+          "scoreA": 1,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab20750eb28f80007b50b4d-r2-pkUsvTtlG3vQo-i1iGt_F",
+          "round": 2,
+          "playerA": "Rockman",
+          "playerB": "Keith",
+          "winner": "Rockman",
+          "scoreA": 1,
+          "scoreB": 0
+        }
+      ]
+    },
+    {
+      "id": "6ab1e54b3d532d0008b5b349",
+      "name": "Adhoc CX",
+      "type": "single_elimination",
+      "createdAt": "2026-09-22T02:17:47.870Z",
+      "matches": [
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r1-MFgIu89jvx91T2SKyr3Zn",
+          "round": 1,
+          "playerA": "Issac",
+          "playerB": "Alan Sir",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r2-MFgIu89jvx91T2SKyr3Zn",
+          "round": 2,
+          "playerA": "Issac",
+          "playerB": "Rockman",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r1-Cak1wWnDBvOsXi9GTxI4r",
+          "round": 1,
+          "playerA": "Jojo",
+          "playerB": "Keith",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r1-H36scDsL3PhJhttLL8y_g",
+          "round": 1,
+          "playerA": "Angus",
+          "playerB": "Alvin",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r2-Uhi-F9mM5i_mEzi094wqF",
+          "round": 2,
+          "playerA": "Alex",
+          "playerB": "Tim",
+          "winner": "Alex",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r3--MkHIglApMDkAfTFlZ4VL",
+          "round": 3,
+          "playerA": "Tim",
+          "playerB": "Alan Sir",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r2-Cak1wWnDBvOsXi9GTxI4r",
+          "round": 2,
+          "playerA": "Jojo",
+          "playerB": "Yin",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r3-MFgIu89jvx91T2SKyr3Zn",
+          "round": 3,
+          "playerA": "Issac",
+          "playerB": "Alex",
+          "winner": "Issac",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r4--MkHIglApMDkAfTFlZ4VL",
+          "round": 4,
+          "playerA": "Tim",
+          "playerB": "Issac",
+          "winner": "Tim",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r2-KxkpBKSa4dJ9P8IzIg_LX",
+          "round": 2,
+          "playerA": "Keith",
+          "playerB": "Alvin",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r3-_cxo6OMNMy8_ebBVk57WS",
+          "round": 3,
+          "playerA": "Yin",
+          "playerB": "Angus",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r4-z9Tobg2R9gJy0XydGdUqR",
+          "round": 4,
+          "playerA": "Rockman",
+          "playerB": "Alan Sir",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r5-z9Tobg2R9gJy0XydGdUqR",
+          "round": 5,
+          "playerA": "Rockman",
+          "playerB": "Tim",
+          "winner": "Rockman",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r3-Cak1wWnDBvOsXi9GTxI4r",
+          "round": 3,
+          "playerA": "Jojo",
+          "playerB": "Alvin",
+          "winner": "Jojo",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r5-2s9uEp1K0CVKg0Dquq0P7",
+          "round": 5,
+          "playerA": "Alan Sir",
+          "playerB": "Alex",
+          "winner": "Alan Sir",
+          "scoreA": 4,
+          "scoreB": 3
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r4-_cxo6OMNMy8_ebBVk57WS",
+          "round": 4,
+          "playerA": "Yin",
+          "playerB": "Alvin",
+          "winner": "Yin",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r4-KxkpBKSa4dJ9P8IzIg_LX",
+          "round": 4,
+          "playerA": "Keith",
+          "playerB": "Angus",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 4
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r5-KxkpBKSa4dJ9P8IzIg_LX",
+          "round": 5,
+          "playerA": "Keith",
+          "playerB": "Yin",
+          "winner": "Keith",
+          "scoreA": 4,
+          "scoreB": 0
+        },
+        {
+          "id": "6ab1e54b3d532d0008b5b349-r5-H36scDsL3PhJhttLL8y_g",
+          "round": 5,
+          "playerA": "Angus",
+          "playerB": "Jojo",
+          "winner": "Angus",
+          "scoreA": 4,
+          "scoreB": 1
+        }
+      ]
+    },
     {
       "id": "6aaa272226419f0008fe1200",
       "name": "CCeP x DWII 第十四屆爆旋陀螺大賽 - 3室禁盃",

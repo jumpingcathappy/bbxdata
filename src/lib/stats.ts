@@ -1,14 +1,41 @@
 import type { MatchupData, Match } from '../types';
 
+// ── Effective date: prefer date embedded in bracket name ─────────
+
+// Extract a YYYYMMDD date from the bracket name, e.g. "adhoc 最強 20261023".
+// Returns it as a sortable string ("2026-10-23") or null when absent/invalid.
+export function extractNameDate(name: string): string | null {
+  const m = name.match(/\b(20\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\b/);
+  if (!m) return null;
+  const date = new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00Z`);
+  // Guard against impossible dates like 2026-02-30 (Date silently rolls over)
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== `${m[1]}-${m[2]}-${m[3]}`) {
+    return null;
+  }
+  return `${m[1]}-${m[2]}-${m[3]}`;
+}
+
+/**
+ * Effective date used for chronological ordering of a bracket's matches.
+ * The lvup.gg API only exposes bracket creation time, but brackets are often
+ * created before (or long after) they are actually played. Players embed the
+ * real play date in the bracket name ("adhoc 盃20260813-1"); when present it
+ * wins, otherwise we fall back to the best available signal: createdAt.
+ */
+export function effectiveBracketDate(bracket: { name: string; createdAt: string }): string {
+  const nameDate = extractNameDate(bracket.name);
+  return nameDate ?? bracket.createdAt;
+}
+
 // ── Chronological ordering helpers ──────────────────────────────
 
 interface ChronologicalMatch {
   match: Match;
-  bracketCreatedAt: string;
+  bracketDate: string;
 }
 
 function chronoSort(a: ChronologicalMatch, b: ChronologicalMatch): number {
-  const t = a.bracketCreatedAt.localeCompare(b.bracketCreatedAt);
+  const t = a.bracketDate.localeCompare(b.bracketDate);
   if (t !== 0) return t;
   return a.match.round - b.match.round;
 }
@@ -19,7 +46,7 @@ function collectPlayerMatches(data: MatchupData, player: string): ChronologicalM
     for (const match of bracket.matches) {
       if (match.winner === null) continue;
       if (match.playerA === player || match.playerB === player) {
-        out.push({ match, bracketCreatedAt: bracket.createdAt });
+        out.push({ match, bracketDate: effectiveBracketDate(bracket) });
       }
     }
   }
@@ -39,7 +66,7 @@ function collectPairMatches(
       const isPair =
         (match.playerA === playerA && match.playerB === playerB) ||
         (match.playerA === playerB && match.playerB === playerA);
-      if (isPair) out.push({ match, bracketCreatedAt: bracket.createdAt });
+      if (isPair) out.push({ match, bracketDate: effectiveBracketDate(bracket) });
     }
   }
   out.sort(chronoSort);
@@ -218,21 +245,22 @@ const ELO_START = 1200;
 const ELO_K = 32;
 
 export function computeWinRateTrend(data: MatchupData): PlayerTrend[] {
-  // Collect all matches with bracket date for sorting
-  interface Entry { player: string; opponent: string; won: boolean; bracketCreatedAt: string; round: number; }
+  // Collect all matches with the bracket's effective date for sorting
+  interface Entry { player: string; opponent: string; won: boolean; bracketDate: string; round: number; }
   const entries: Entry[] = [];
   for (const bracket of data.brackets) {
+    const bracketDate = effectiveBracketDate(bracket);
     for (const match of bracket.matches) {
       if (match.winner === null) continue;
       const wonA = match.winner === match.playerA;
-      entries.push({ player: match.playerA, opponent: match.playerB, won: wonA, bracketCreatedAt: bracket.createdAt, round: match.round });
-      entries.push({ player: match.playerB, opponent: match.playerA, won: !wonA, bracketCreatedAt: bracket.createdAt, round: match.round });
+      entries.push({ player: match.playerA, opponent: match.playerB, won: wonA, bracketDate, round: match.round });
+      entries.push({ player: match.playerB, opponent: match.playerA, won: !wonA, bracketDate, round: match.round });
     }
   }
 
   // Sort chronologically
   entries.sort((a, b) => {
-    const t = a.bracketCreatedAt.localeCompare(b.bracketCreatedAt);
+    const t = a.bracketDate.localeCompare(b.bracketDate);
     if (t !== 0) return t;
     return a.round - b.round;
   });
@@ -312,23 +340,24 @@ export interface EloRating {
 export function computeEloRatings(data: MatchupData): EloRating[] {
   const eloMap = new Map<string, number>();
 
-  // Collect all decided matches with bracket dates for chronological sort
-  interface Entry { playerA: string; playerB: string; winner: string; bracketCreatedAt: string; round: number; }
+  // Collect all decided matches with the bracket's effective date for chronological sort
+  interface Entry { playerA: string; playerB: string; winner: string; bracketDate: string; round: number; }
   const entries: Entry[] = [];
   for (const bracket of data.brackets) {
+    const bracketDate = effectiveBracketDate(bracket);
     for (const match of bracket.matches) {
       if (match.winner === null) continue;
       entries.push({
         playerA: match.playerA,
         playerB: match.playerB,
         winner: match.winner,
-        bracketCreatedAt: bracket.createdAt,
+        bracketDate,
         round: match.round,
       });
     }
   }
   entries.sort((a, b) => {
-    const t = a.bracketCreatedAt.localeCompare(b.bracketCreatedAt);
+    const t = a.bracketDate.localeCompare(b.bracketDate);
     if (t !== 0) return t;
     return a.round - b.round;
   });

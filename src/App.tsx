@@ -57,6 +57,7 @@ export default function App() {
   const tabs: { id: Tab; label: string }[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'headtohead', label: 'Head-to-Head' },
+    { id: 'player', label: 'Player Profile' },
     { id: 'leaderboard', label: 'Leaderboard' },
     { id: 'trends', label: 'Trends' },
     { id: 'brackets', label: 'Brackets' },

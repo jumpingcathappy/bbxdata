@@ -7,12 +7,13 @@ import Overview from './components/Overview';
 import HeadToHead from './components/HeadToHead';
 import Leaderboard from './components/Leaderboard';
 import Brackets from './components/Brackets';
+import PlayerProfileView from './components/PlayerProfile';
 import Trends from './components/Trends';
 import SyncButton from './components/SyncButton';
 
 const AUTH_HASH = '0fa46c8cb639c882eba8fac0eb59c701a4735e16bc0b92a9da502a50e94ceb6b';
 
-type Tab = 'overview' | 'headtohead' | 'leaderboard' | 'trends' | 'brackets';
+type Tab = 'overview' | 'headtohead' | 'player' | 'leaderboard' | 'trends' | 'brackets';
 
 function isAuthenticated(): boolean {
   return sessionStorage.getItem('auth') === AUTH_HASH;
@@ -87,6 +88,7 @@ export default function App() {
           <>
             {tab === 'overview' && <Overview data={data} />}
             {tab === 'headtohead' && <HeadToHead data={data} />}
+            {tab === 'player' && <PlayerProfileView data={data} />}
             {tab === 'leaderboard' && <Leaderboard data={data} />}
             {tab === 'trends' && <Trends data={data} />}
             {tab === 'brackets' && <Brackets data={data} />}

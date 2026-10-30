@@ -331,12 +331,6 @@ export interface EloRating {
   player: string;
   elo: number;
 }
-
-/**
- * Compute each player's final Elo rating by replaying all matches
- * chronologically. Uses the same params as the Trends chart:
- * start=1200, K=32.
- */
 export function computeEloRatings(data: MatchupData): EloRating[] {
   const eloMap = new Map<string, number>();
 
@@ -526,4 +520,143 @@ export function computeLeaderboard(data: MatchupData): LeaderboardEntry[] {
 
   entries.sort((x, y) => y.wins - x.wins || y.winRate - x.winRate);
   return entries;
+}
+// ── Player profile: Elo timeline + match history ─────────────────
+
+export interface PlayerMatchRecord {
+  date: string;          // effective play date (from bracket name or createdAt)
+  tournament: string;    // bracket name
+  bracketId: string;
+  round: number;
+  opponent: string;
+  won: boolean;
+  playerScore: number | null;
+  opponentScore: number | null;
+  eloBefore: number;     // rounded, 1200 start
+  eloAfter: number;
+  eloDelta: number;      // after - before, rounded
+}
+
+export interface PlayerOpponentElo {
+  opponent: string;
+  wins: number;
+  losses: number;
+  total: number;
+  avgEloDeltaAgainst: number | null; // mean of player's Elo delta in matches vs this opponent
+}
+
+export interface PlayerProfile {
+  player: string;
+  currentElo: number;
+  matches: PlayerMatchRecord[];              // chronological
+  opponents: PlayerOpponentElo[];            // sorted by wins desc
+  peakElo: number;
+  bestWin: PlayerMatchRecord | null;         // biggest positive Elo delta
+  worstLoss: PlayerMatchRecord | null;       // biggest negative Elo delta
+}
+
+/**
+ * Replays all decided matches chronologically (same rules as the Elo
+ * leaderboard: start 1200, K 32, name-date ordering) and records, for the
+ * given player, every match with tournament context and Elo before/after.
+ * Players with no decided matches get an empty profile (currentElo = 1200).
+ */
+export function computePlayerProfile(data: MatchupData, player: string): PlayerProfile {
+  const bracketById = new Map(data.brackets.map((b) => [b.id, b]));
+
+  interface Entry {
+    playerA: string; playerB: string; winner: string;
+    bracketDate: string; round: number; bracketId: string;
+  }
+  const entries: Entry[] = [];
+  for (const bracket of data.brackets) {
+    const bracketDate = effectiveBracketDate(bracket);
+    for (const match of bracket.matches) {
+      if (match.winner === null) continue;
+      entries.push({
+        playerA: match.playerA,
+        playerB: match.playerB,
+        winner: match.winner,
+        bracketDate,
+        round: match.round,
+        bracketId: bracket.id,
+      });
+    }
+  }
+  entries.sort((a, b) => {
+    const t = a.bracketDate.localeCompare(b.bracketDate);
+    if (t !== 0) return t;
+    return a.round - b.round;
+  });
+
+  const eloMap = new Map<string, number>();
+  const matches: PlayerMatchRecord[] = [];
+  const oppStats = new Map<string, { wins: number; losses: number; deltas: number[] }>();
+
+  for (const e of entries) {
+    const aElo = eloMap.get(e.playerA) ?? ELO_START;
+    const bElo = eloMap.get(e.playerB) ?? ELO_START;
+    const expectedA = 1 / (1 + Math.pow(10, (bElo - aElo) / 400));
+    const expectedB = 1 / (1 + Math.pow(10, (aElo - bElo) / 400));
+    const actualA = e.winner === e.playerA ? 1 : 0;
+    const aNew = aElo + ELO_K * (actualA - expectedA);
+    const bNew = bElo + ELO_K * ((1 - actualA) - expectedB);
+    eloMap.set(e.playerA, aNew);
+    eloMap.set(e.playerB, bNew);
+
+    if (e.playerA !== player && e.playerB !== player) continue;
+
+    const isA = e.playerA === player;
+    const before = Math.round(isA ? aElo : bElo);
+    const after = Math.round(isA ? aNew : bNew);
+    const won = e.winner === player;
+    const opponent = isA ? e.playerB : e.playerA;
+
+    const bracket = bracketById.get(e.bracketId)!;
+    const match = bracket.matches.find((m) => m.round === e.round && (m.playerA === player || m.playerB === player) && (m.winner === e.winner)) ?? null;
+    const playerScore = match ? (match.playerA === player ? match.scoreA : match.scoreB) : null;
+    const opponentScore = match ? (match.playerA === player ? match.scoreB : match.scoreA) : null;
+
+    matches.push({
+      date: e.bracketDate,
+      tournament: bracket.name,
+      bracketId: e.bracketId,
+      round: e.round,
+      opponent,
+      won,
+      playerScore,
+      opponentScore,
+      eloBefore: before,
+      eloAfter: after,
+      eloDelta: after - before,
+    });
+
+    const st = oppStats.get(opponent) ?? { wins: 0, losses: 0, deltas: [] };
+    if (won) st.wins += 1; else st.losses += 1;
+    st.deltas.push(after - before);
+    oppStats.set(opponent, st);
+  }
+
+  const opponents: PlayerOpponentElo[] = Array.from(oppStats.entries()).map(([opponent, st]) => ({
+    opponent,
+    wins: st.wins,
+    losses: st.losses,
+    total: st.wins + st.losses,
+    avgEloDeltaAgainst: st.deltas.length ? st.deltas.reduce((x, y) => x + y, 0) / st.deltas.length : null,
+  }));
+  opponents.sort((a, b) => b.wins - a.wins || a.losses - b.losses || a.opponent.localeCompare(b.opponent));
+
+  const currentElo = Math.round(eloMap.get(player) ?? ELO_START);
+  const best = matches.reduce<PlayerMatchRecord | null>((acc, m) => (!acc || m.eloDelta > acc.eloDelta ? m : acc), null);
+  const worst = matches.reduce<PlayerMatchRecord | null>((acc, m) => (!acc || m.eloDelta < acc.eloDelta ? m : acc), null);
+
+  return {
+    player,
+    currentElo,
+    matches,
+    opponents,
+    peakElo: Math.max(ELO_START, ...matches.map((m) => m.eloAfter)),
+    bestWin: best && best.eloDelta > 0 ? best : null,
+    worstLoss: worst && worst.eloDelta < 0 ? worst : null,
+  };
 }

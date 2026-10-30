@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { extractNameDate, effectiveBracketDate, computeEloRatings, computePlayerStreak } from '../stats';
+import { extractNameDate, effectiveBracketDate, computeEloRatings, computePlayerStreak, computePlayerProfile } from '../stats';
 import type { MatchupData } from '../../types';
 
 describe('extractNameDate', () => {
@@ -109,5 +109,80 @@ describe('date-in-name ordering effect', () => {
     // Longest win streak also 1 (single win in history)
 
     expect(s.longestWinStreak).toBe(1);
+  });
+});
+describe('computePlayerProfile', () => {
+  // Two tournaments A and B on the same day; B's bracket has 2 rounds.
+  const data: MatchupData = {
+    exportedAt: '',
+    brackets: [
+      {
+        id: 't1',
+        name: 'adhoc 20260301',
+        type: 'single-elimination',
+        createdAt: '2026-02-20T00:00:00Z',
+        matches: [
+          { id: 'm1', round: 1, playerA: 'X', playerB: 'Y', winner: 'X', scoreA: 4, scoreB: 1 },
+        ],
+      },
+      {
+        id: 't2',
+        name: 'Cup B', // no date -> createdAt
+        type: 'single-elimination',
+        createdAt: '2026-03-05T00:00:00Z',
+        matches: [
+          { id: 'm2', round: 1, playerA: 'X', playerB: 'Z', winner: 'Z', scoreA: 2, scoreB: 4 },
+          { id: 'm3', round: 2, playerA: 'X', playerB: 'Y', winner: 'X', scoreA: 4, scoreB: 3 },
+        ],
+      },
+    ],
+  };
+
+  it('produces chronological match records with tournament, scores and Elo deltas', () => {
+    const profile = computePlayerProfile(data, 'X');
+    expect(profile.matches).toHaveLength(3);
+    // Order: t1 (Mar 1 via name date) first, then t2 rounds 1-2 (Mar 5 via createdAt)
+    expect(profile.matches[0]).toMatchObject({
+      tournament: 'adhoc 20260301',
+      opponent: 'Y',
+      won: true,
+      playerScore: 4,
+      opponentScore: 1,
+      eloBefore: 1200,
+    });
+    expect(profile.matches[0].eloDelta).toBeGreaterThan(0);
+    // Second match is the LOSS vs Z within tournament t2
+    expect(profile.matches[1]).toMatchObject({ tournament: 'Cup B', opponent: 'Z', won: false });
+    expect(profile.matches[1].eloDelta).toBeLessThan(0);
+    // Most recent: win vs Y again
+    expect(profile.matches[2]).toMatchObject({ opponent: 'Y', won: true });
+
+    // Current Elo matches the replay
+    expect(profile.currentElo).toBe(profile.matches[2].eloAfter);
+    // Peak and best/worst
+    expect(profile.peakElo).toBe(Math.max(...profile.matches.map((m) => m.eloAfter)));
+    expect(profile.bestWin!.opponent).toBe('Y');
+    expect(profile.worstLoss!.opponent).toBe('Z');
+  });
+
+  it('per-opponent breakdown aggregates wins/losses and avg Elo delta', () => {
+    const profile = computePlayerProfile(data, 'X');
+    const vsY = profile.opponents.find((o) => o.opponent === 'Y')!;
+    expect(vsY.wins).toBe(2);
+    expect(vsY.losses).toBe(0);
+    expect(vsY.avgEloDeltaAgainst).toBeCloseTo(
+      (profile.matches[0].eloDelta + profile.matches[2].eloDelta) / 2,
+      5,
+    );
+    const vsZ = profile.opponents.find((o) => o.opponent === 'Z')!;
+    expect(vsZ.wins).toBe(0);
+    expect(vsZ.losses).toBe(1);
+  });
+
+  it('returns an empty profile for a player with no matches', () => {
+    const p = computePlayerProfile(data, 'Nobody');
+    expect(p.matches).toHaveLength(0);
+    expect(p.opponents).toHaveLength(0);
+    expect(p.currentElo).toBe(1200);
   });
 });
